@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "vendor" },
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "variant_picker": { "type": "variant_picker" },
+        "quantity_selector": { "type": "quantity_selector" },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": { "show_dynamic_checkout": true }
+        },
+        "description": { "type": "description" },
+        "tab-details": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Detalles y cuidado",
+            "content": "<p>Agrega aquí la composición, la guía de cuidado o la información del producto.</p>"
+          }
+        },
+        "tab-shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Envíos y devoluciones",
+            "content": "<p>Agrega aquí tu política de envíos y devoluciones.</p>"
+          }
+        },
+        "share": { "type": "share" }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "tab-details",
+        "tab-shipping",
+        "share"
+      ],
+      "settings": {}
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "También te puede gustar",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": ["main", "related"]
+}

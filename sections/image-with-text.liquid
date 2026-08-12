@@ -1,0 +1,89 @@
+<div class="section-padding">
+  <div class="page-width">
+    <div class="image-with-text{% if section.settings.layout == 'reverse' %} image-with-text--reverse{% endif %}">
+      <div class="image-with-text__media scroll-trigger">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1500
+            | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '550, 750, 1100, 1500', alt: section.settings.image.alt
+          }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+      <div class="image-with-text__content scroll-trigger">
+        {%- if section.settings.subheading != blank -%}
+          <p style="letter-spacing:.2em;text-transform:uppercase;font-size:1.2rem;opacity:.6;margin:0 0 1rem;">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {{ section.settings.text }}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--secondary">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Imagen con texto",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen",
+      "info": "Recomendado: 1200 x 1500 px"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Posición de la imagen",
+      "options": [
+        { "value": "default", "label": "Izquierda" },
+        { "value": "reverse", "label": "Derecha" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Editorial"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Imprescindibles de temporada"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Prendas versátiles pensadas para el uso diario: del entrenamiento a la calle sin perder estilo.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Etiqueta del botón",
+      "default": "Descubrir"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace del botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Imagen con texto"
+    }
+  ]
+}
+{% endschema %}

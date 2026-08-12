@@ -1,0 +1,126 @@
+<footer class="footer">
+  <div class="page-width">
+    <div class="footer__blocks">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="footer__title">{{ block.settings.heading | escape }}</p>
+              <ul class="footer__menu">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'newsletter' -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="footer__title">{{ block.settings.heading | escape }}</p>
+              <p style="opacity:.7">{{ block.settings.text | escape }}</p>
+              {%- form 'customer', class: 'newsletter__form' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  required
+                  placeholder="{{ 'newsletter.label' | t }}"
+                  aria-label="{{ 'newsletter.label' | t }}"
+                  autocomplete="email"
+                >
+                <button type="submit" class="button">{{ 'newsletter.button_label' | t }}</button>
+                {%- if form.posted_successfully? -%}
+                  <p role="status" style="margin:0">{{ 'newsletter.success' | t }}</p>
+                {%- endif -%}
+              {%- endform -%}
+              <ul class="footer__social" role="list">
+                {%- if settings.social_instagram_link != blank -%}
+                  <li><a href="{{ settings.social_instagram_link }}" aria-label="Instagram">{% render 'icon', icon: 'instagram' %}</a></li>
+                {%- endif -%}
+                {%- if settings.social_facebook_link != blank -%}
+                  <li><a href="{{ settings.social_facebook_link }}" aria-label="Facebook">{% render 'icon', icon: 'facebook' %}</a></li>
+                {%- endif -%}
+                {%- if settings.social_tiktok_link != blank -%}
+                  <li><a href="{{ settings.social_tiktok_link }}" aria-label="TikTok">{% render 'icon', icon: 'tiktok' %}</a></li>
+                {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <li><a href="{{ settings.social_youtube_link }}" aria-label="YouTube">{% render 'icon', icon: 'youtube' %}</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</span>
+      {%- if section.settings.show_payment_icons -%}
+        <div role="list" aria-label="{{ 'sections.footer.payment' | t }}" style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Mostrar íconos de pago",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menú",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Comprar"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menú",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Suscripción",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Únete a la comunidad"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Novedades, lanzamientos y ofertas exclusivas directamente en tu correo."
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link_list" },
+      { "type": "link_list" },
+      { "type": "link_list" },
+      { "type": "newsletter" }
+    ]
+  }
+}
+{% endschema %}

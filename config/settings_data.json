@@ -1,0 +1,15 @@
+{
+  "current": {
+    "color_background": "#FFFFFF",
+    "color_text": "#111111",
+    "color_accent": "#111111",
+    "color_accent_text": "#FFFFFF",
+    "color_sale": "#B3261E",
+    "color_border": "#E5E2DD",
+    "type_header_font": "assistant_n7",
+    "type_body_font": "assistant_n4",
+    "page_width": 1600,
+    "button_radius": 0,
+    "card_radius": 0
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "type": "footer",
+  "name": "Grupo de pie de página",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Comprar",
+            "menu": "footer"
+          }
+        },
+        "menu-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "footer"
+          }
+        },
+        "menu-3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Nosotros",
+            "menu": "footer"
+          }
+        },
+        "newsletter-1": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Únete a la comunidad",
+            "text": "Novedades, lanzamientos y ofertas exclusivas directamente en tu correo."
+          }
+        }
+      },
+      "block_order": ["menu-1", "menu-2", "menu-3", "newsletter-1"],
+      "settings": {
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

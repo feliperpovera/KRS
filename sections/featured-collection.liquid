@@ -1,0 +1,81 @@
+<div class="section-padding">
+  <div class="page-width">
+    <carousel-slider>
+      <div class="section-header scroll-trigger">
+        <h2 class="section-header__title">{{ section.settings.heading | escape }}</h2>
+        <div style="display:flex;align-items:center;gap:2rem;">
+          {%- if section.settings.show_view_all and section.settings.collection != blank -%}
+            <a href="{{ section.settings.collection.url }}" class="link-underline">
+              {{ section.settings.view_all_label | default: 'Ver todo' | escape }}
+            </a>
+          {%- endif -%}
+          <div class="carousel-nav">
+            <button type="button" data-carousel-prev aria-label="{{ 'accessibility.previous_slide' | t }}">
+              {% render 'icon', icon: 'arrow-left' %}
+            </button>
+            <button type="button" data-carousel-next aria-label="{{ 'accessibility.next_slide' | t }}">
+              {% render 'icon', icon: 'arrow-right' %}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="carousel" role="list">
+        {%- if section.settings.collection != blank -%}
+          {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+            <li>{% render 'product-card', card_product: product %}</li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..section.settings.products_to_show) -%}
+            <li>{% render 'product-card' %}</li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </carousel-slider>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Colección destacada",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Best sellers"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "Productos a mostrar",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Mostrar enlace \"ver todo\"",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "Etiqueta de \"ver todo\"",
+      "default": "Ver todo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Colección destacada"
+    }
+  ]
+}
+{% endschema %}

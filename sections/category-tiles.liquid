@@ -1,0 +1,118 @@
+<div class="section-padding">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header scroll-trigger">
+        <h2 class="section-header__title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ section.settings.link }}" class="link-underline">{{ section.settings.link_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="tile-grid tile-grid--{{ section.settings.columns }}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_url = block.settings.link
+          if tile_url == blank and block.settings.collection != blank
+            assign tile_url = block.settings.collection.url
+          endif
+          assign tile_title = block.settings.title
+          if tile_title == blank and block.settings.collection != blank
+            assign tile_title = block.settings.collection.title
+          endif
+        -%}
+        <a href="{{ tile_url | default: '#' }}" class="tile scroll-trigger" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 25vw, 50vw', widths: '360, 540, 720, 900', alt: tile_title
+            }}
+          {%- elsif block.settings.collection.featured_image != blank -%}
+            {{
+              block.settings.collection.featured_image
+              | image_url: width: 900
+              | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 25vw, 50vw', alt: tile_title
+            }}
+          {%- else -%}
+            {{ 'collection-apparel-1' | placeholder_svg_tag }}
+          {%- endif -%}
+          <span class="tile__label">{{ tile_title | default: 'Categoría' | escape }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mosaico de categorías",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Comprar por actividad"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Etiqueta del enlace \"ver todo\""
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Enlace \"ver todo\""
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columnas en escritorio",
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Categoría",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen",
+          "info": "Reemplaza la imagen de la colección. Recomendado: 900 x 1200 px."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título personalizado"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace personalizado"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mosaico de categorías",
+      "blocks": [
+        { "type": "tile", "settings": { "title": "Yoga" } },
+        { "type": "tile", "settings": { "title": "Pilates" } },
+        { "type": "tile", "settings": { "title": "Running" } },
+        { "type": "tile", "settings": { "title": "Entrenamiento" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

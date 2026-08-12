@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "height": "full",
+        "alignment": "left",
+        "subheading": "Nueva colección",
+        "heading": "Del estudio a la calle",
+        "text": "Diseño técnico y estilo urbano para acompañarte todo el día.",
+        "button_label_1": "Comprar mujer",
+        "button_label_2": "Comprar hombre"
+      }
+    },
+    "new-arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Novedades",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_label": "Ver todo"
+      }
+    },
+    "shop-by-activity": {
+      "type": "category-tiles",
+      "blocks": {
+        "tile-1": { "type": "tile", "settings": { "title": "Yoga" } },
+        "tile-2": { "type": "tile", "settings": { "title": "Pilates" } },
+        "tile-3": { "type": "tile", "settings": { "title": "Running" } },
+        "tile-4": { "type": "tile", "settings": { "title": "Entrenamiento" } }
+      },
+      "block_order": ["tile-1", "tile-2", "tile-3", "tile-4"],
+      "settings": {
+        "heading": "Comprar por actividad",
+        "columns": 4
+      }
+    },
+    "editorial-1": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "default",
+        "subheading": "Editorial",
+        "heading": "Imprescindibles de temporada",
+        "text": "<p>Prendas versátiles pensadas para el uso diario: del entrenamiento a la calle sin perder estilo.</p>",
+        "button_label": "Comprar best sellers"
+      }
+    },
+    "best-sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best sellers",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_label": "Ver todo"
+      }
+    },
+    "shop-by-color": {
+      "type": "category-tiles",
+      "blocks": {
+        "color-1": { "type": "tile", "settings": { "title": "Negro" } },
+        "color-2": { "type": "tile", "settings": { "title": "Blanco" } },
+        "color-3": { "type": "tile", "settings": { "title": "Rosa" } },
+        "color-4": { "type": "tile", "settings": { "title": "Azul marino" } },
+        "color-5": { "type": "tile", "settings": { "title": "Tierra" } }
+      },
+      "block_order": ["color-1", "color-2", "color-3", "color-4", "color-5"],
+      "settings": {
+        "heading": "Comprar por color",
+        "columns": 5
+      }
+    },
+    "editorial-2": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "reverse",
+        "subheading": "Comunidad",
+        "heading": "¿Primera vez aquí?",
+        "text": "<p>Descubre los favoritos de la comunidad y encuentra tu talla ideal con nuestra guía.</p>",
+        "button_label": "Comenzar aquí"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Únete a la comunidad",
+        "text": "Sé la primera persona en enterarte de lanzamientos, restocks y ofertas exclusivas."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "new-arrivals",
+    "shop-by-activity",
+    "editorial-1",
+    "best-sellers",
+    "shop-by-color",
+    "editorial-2",
+    "newsletter"
+  ]
+}

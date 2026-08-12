@@ -1,0 +1,27 @@
+{
+  "type": "header",
+  "name": "Grupo de encabezado",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Envío gratis en pedidos superiores a $250.000",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["announcement-1"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

@@ -1,0 +1,144 @@
+<sticky-header class="header-wrapper">
+  <header class="header page-width">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <drawer-toggle data-target="MenuDrawer" class="header__menu-toggle">
+        <button class="header__icon" aria-label="{{ 'accessibility.open_menu' | t }}" aria-controls="MenuDrawer">
+          {% render 'icon', icon: 'hamburger' %}
+        </button>
+      </drawer-toggle>
+
+      <nav class="header__nav" role="navigation" aria-label="{{ 'sections.header.menu' | t }}">
+        {%- for link in section.settings.menu.links -%}
+          <div class="nav-item{% if link.links.size > 0 %} nav-item--mega{% endif %}">
+            <a href="{{ link.url }}" class="nav-item__link" {% if link.links.size > 0 %}aria-expanded="false" aria-haspopup="true"{% endif %}>
+              {{ link.title | escape }}
+            </a>
+            {%- if link.links.size > 0 -%}
+              <div class="mega-menu">
+                <div class="mega-menu__inner">
+                  {%- for childlink in link.links -%}
+                    <div>
+                      <p class="mega-menu__column-title">
+                        <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                      </p>
+                      {%- if childlink.links.size > 0 -%}
+                        <ul class="mega-menu__list">
+                          {%- for grandchildlink in childlink.links -%}
+                            <li><a href="{{ grandchildlink.url }}">{{ grandchildlink.title | escape }}</a></li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <a href="{{ routes.root_url }}" class="header__logo">
+      {%- if section.settings.logo != blank -%}
+        {{
+          section.settings.logo
+          | image_url: width: 300
+          | image_tag: alt: shop.name, width: section.settings.logo.width, height: section.settings.logo.height
+        }}
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+
+    <div class="header__icons">
+      <drawer-toggle data-target="SearchModal">
+        <button class="header__icon" aria-label="{{ 'accessibility.open_search' | t }}" aria-controls="SearchModal">
+          {% render 'icon', icon: 'search' %}
+        </button>
+      </drawer-toggle>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="{{ 'accessibility.account' | t }}">
+          {% render 'icon', icon: 'account' %}
+        </a>
+      {%- endif -%}
+
+      <drawer-toggle data-target="CartDrawer">
+        <button class="header__icon" aria-label="{{ 'accessibility.cart' | t }}" aria-controls="CartDrawer">
+          {% render 'icon', icon: 'cart' %}
+          <span id="cart-icon-bubble">
+            {%- if cart.item_count > 0 -%}
+              <span class="cart-count-bubble" aria-hidden="true">{{ cart.item_count }}</span>
+              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            {%- endif -%}
+          </span>
+        </button>
+      </drawer-toggle>
+    </div>
+  </header>
+</sticky-header>
+
+{%- comment -%} Menú móvil {%- endcomment -%}
+<div id="MenuDrawer" class="menu-drawer" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="menu-drawer__overlay" data-drawer-close></div>
+  <div class="menu-drawer__panel">
+    <button class="menu-drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+    <nav class="menu-drawer__nav">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <details>
+            <summary>{{ link.title | escape }}</summary>
+            <ul class="menu-drawer__sublist">
+              {%- for childlink in link.links -%}
+                <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+                {%- for grandchildlink in childlink.links -%}
+                  <li><a href="{{ grandchildlink.url }}">&mdash; {{ grandchildlink.title | escape }}</a></li>
+                {%- endfor -%}
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+</div>
+
+{%- comment -%} Modal de búsqueda {%- endcomment -%}
+<div id="SearchModal" class="search-modal" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form page-width">
+    <input
+      type="search"
+      name="q"
+      placeholder="{{ 'general.search.placeholder' | t }}"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="button">{{ 'general.search.search' | t }}</button>
+    <button type="button" class="header__icon" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

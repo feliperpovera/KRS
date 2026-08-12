@@ -1,0 +1,129 @@
+<div class="hero hero--{{ section.settings.height }}">
+  <div class="hero__media">
+    {%- if section.settings.video != blank -%}
+      {{
+        section.settings.video
+        | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true
+      }}
+    {%- elsif section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3000
+        | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 2200, 3000', alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag }}
+    {%- endif -%}
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="hero__content page-width{% if section.settings.alignment == 'center' %} hero__content--center{% endif %}">
+    <div class="scroll-trigger">
+      {%- if section.settings.subheading != blank -%}
+        <p style="letter-spacing:.2em;text-transform:uppercase;font-size:1.2rem;margin:0 0 1rem;">
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hero__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="hero__subheading">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      <div class="hero__buttons">
+        {%- if section.settings.button_label_1 != blank -%}
+          <a href="{{ section.settings.button_link_1 }}" class="button">{{ section.settings.button_label_1 | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 }}" class="button button--secondary">{{ section.settings.button_label_2 | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner principal",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo",
+      "info": "Recomendado: 3000 x 1600 px. Si no se selecciona, se muestra un placeholder."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video de fondo (opcional)",
+      "info": "Si se selecciona, reemplaza la imagen."
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Altura",
+      "options": [
+        { "value": "small", "label": "Pequeña" },
+        { "value": "medium", "label": "Media" },
+        { "value": "full", "label": "Pantalla completa" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alineación del contenido",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo superior",
+      "default": "Nueva colección"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Del estudio a la calle"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "Diseño técnico y estilo urbano para acompañarte todo el día."
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Botón 1: etiqueta",
+      "default": "Comprar mujer"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Botón 1: enlace"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botón 2: etiqueta",
+      "default": "Comprar hombre"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Botón 2: enlace"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner principal"
+    }
+  ]
+}
+{% endschema %}

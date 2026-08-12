@@ -1,0 +1,46 @@
+{%- comment -%}
+  Tarjeta de producto reutilizable.
+  Uso: {% render 'product-card', card_product: product %}
+  Si card_product está vacío, muestra un placeholder editable.
+{%- endcomment -%}
+{%- if card_product and card_product != blank -%}
+  <div class="product-card scroll-trigger">
+    <a href="{{ card_product.url }}" class="product-card__media" aria-label="{{ card_product.title | escape }}">
+      {%- if card_product.compare_at_price > card_product.price -%}
+        <span class="product-card__badge product-card__badge--sale">{{ 'products.product.on_sale' | t }}</span>
+      {%- endif -%}
+      {%- if card_product.featured_media -%}
+        {{
+          card_product.featured_media
+          | image_url: width: 800
+          | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 25vw, 68vw', alt: card_product.featured_media.alt
+        }}
+        {%- if card_product.media[1] -%}
+          {{
+            card_product.media[1]
+            | image_url: width: 800
+            | image_tag: loading: 'lazy', class: 'product-card__image--hover', alt: card_product.media[1].alt
+          }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </a>
+    <div class="product-card__info">
+      <h3 class="product-card__title">
+        <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+      </h3>
+      {% render 'price', product: card_product %}
+    </div>
+  </div>
+{%- else -%}
+  <div class="product-card scroll-trigger">
+    <div class="product-card__media">
+      {{ 'product-apparel-1' | placeholder_svg_tag }}
+    </div>
+    <div class="product-card__info">
+      <h3 class="product-card__title">Producto de ejemplo</h3>
+      <div class="price"><span>$ 190.000</span></div>
+    </div>
+  </div>
+{%- endif -%}

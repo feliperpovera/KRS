@@ -1,0 +1,51 @@
+<div class="section-padding">
+  <div class="page-width">
+    <div class="newsletter scroll-trigger">
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <p style="opacity:.75">{{ section.settings.text | escape }}</p>
+      {%- form 'customer', class: 'newsletter__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          required
+          placeholder="{{ 'newsletter.label' | t }}"
+          aria-label="{{ 'newsletter.label' | t }}"
+          autocomplete="email"
+        >
+        <button type="submit" class="button">{{ 'newsletter.button_label' | t }}</button>
+      {%- endform -%}
+      {%- form 'customer' -%}
+        {%- if form.posted_successfully? -%}
+          <p role="status">{{ 'newsletter.success' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Suscripción por correo",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Únete a la comunidad"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "Sé la primera persona en enterarte de lanzamientos, restocks y ofertas exclusivas."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Suscripción por correo"
+    }
+  ]
+}
+{% endschema %}

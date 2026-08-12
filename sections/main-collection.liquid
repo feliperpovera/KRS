@@ -1,0 +1,156 @@
+<div class="page-width">
+  <header class="collection-header">
+    <h1>{{ collection.title | escape }}</h1>
+    {%- if collection.description != blank -%}
+      <p>{{ collection.description | strip_html | truncate: 240 }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    <div class="collection-toolbar">
+      {%- if section.settings.enable_filtering -%}
+        <form class="facets" id="FacetsForm">
+          {%- for filter in collection.filters -%}
+            <details>
+              <summary>
+                {{ filter.label | escape }}
+                {%- if filter.active_values.size > 0 %} ({{ filter.active_values.size }}){% endif -%}
+              </summary>
+              <div class="facets__panel">
+                {%- case filter.type -%}
+                  {%- when 'boolean', 'list' -%}
+                    {%- for value in filter.values -%}
+                      <label>
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          onchange="this.form.submit()"
+                        >
+                        {{ value.label | escape }} ({{ value.count }})
+                      </label>
+                    {%- endfor -%}
+                  {%- when 'price_range' -%}
+                    <label>
+                      Desde
+                      <input
+                        type="number"
+                        name="{{ filter.min_value.param_name }}"
+                        value="{{ filter.min_value.value | money_without_currency | remove: ',' }}"
+                        min="0"
+                        style="width:9rem"
+                      >
+                    </label>
+                    <label>
+                      Hasta
+                      <input
+                        type="number"
+                        name="{{ filter.max_value.param_name }}"
+                        value="{{ filter.max_value.value | money_without_currency | remove: ',' }}"
+                        min="0"
+                        style="width:9rem"
+                      >
+                    </label>
+                    <button type="submit" class="button button--secondary" style="min-height:3.6rem;margin-top:1rem;">
+                      {{ 'products.facets.filter_by_label' | t }}
+                    </button>
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+          {%- if collection.filters.size > 0 -%}
+            <a href="{{ collection.url }}" class="link-underline" style="align-self:center;">
+              {{ 'products.facets.clear_all' | t }}
+            </a>
+          {%- endif -%}
+        </form>
+      {%- endif -%}
+
+      <div style="display:flex;align-items:center;gap:1.6rem;margin-left:auto;">
+        <span>{{ 'products.facets.product_count' | t: count: collection.products_count }}</span>
+        {%- if section.settings.enable_sorting -%}
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <label class="visually-hidden" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
+          <select
+            id="SortBy"
+            onchange="const url = new URL(window.location.href); url.searchParams.set('sort_by', this.value); window.location.href = url.href;"
+          >
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+                {{ option.name | escape }}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if collection.products.size > 0 -%}
+      <ul class="product-grid" role="list">
+        {%- for product in collection.products -%}
+          <li>{% render 'product-card', card_product: product %}</li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if paginate.pages > 1 -%}
+        <nav aria-label="{{ 'general.pagination.label' | t }}">
+          <ul class="pagination">
+            {%- if paginate.previous -%}
+              <li><a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">&lsaquo;</a></li>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              <li>
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span>{{ part.title }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <li><a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">&rsaquo;</a></li>
+            {%- endif -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <h2>{{ 'templates.collection.empty' | t }}</h2>
+        <p>{{ 'templates.collection.use_fewer_filters_html' | t: link: collection.url }}</p>
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Colección principal",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Productos por página",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Habilitar filtros",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Habilitar ordenamiento",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
