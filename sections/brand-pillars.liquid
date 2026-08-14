@@ -1,0 +1,63 @@
+<div class="section-padding" style="border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header scroll-trigger" style="justify-content:center;">
+        <h2 class="section-header__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="pillars">
+      {%- for block in section.blocks -%}
+        <div class="pillar scroll-trigger" {{ block.shopify_attributes }}>
+          <p class="pillar__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</p>
+          <h3 class="pillar__title">{{ block.settings.title | escape }}</h3>
+          <p class="pillar__text">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pilares de marca",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Nos importa cada detalle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pilar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Calidad"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Nunca comprometemos lo que entregamos."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pilares de marca",
+      "blocks": [
+        { "type": "pillar", "settings": { "title": "Fabricación propia", "text": "Desarrollamos nuestras propias telas." } },
+        { "type": "pillar", "settings": { "title": "Diseño propio", "text": "Cada prenda se diseña con intención." } },
+        { "type": "pillar", "settings": { "title": "Detalle", "text": "Controlamos cada paso del proceso." } },
+        { "type": "pillar", "settings": { "title": "Calidad", "text": "Nunca comprometemos lo que entregamos." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -8,20 +8,26 @@
         "announcement-1": {
           "type": "announcement",
           "settings": {
-            "text": "Envío gratis en pedidos superiores a $250.000",
+            "text": "Envío gratis en pedidos superiores a $250.000 · The life you live",
             "link": ""
           }
         }
       },
-      "block_order": ["announcement-1"],
+      "block_order": [
+        "announcement-1"
+      ],
       "settings": {}
     },
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "sale_label": "Ofertas"
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

@@ -35,6 +35,28 @@
             {%- endif -%}
           </div>
         {%- endfor -%}
+
+        {%- if section.settings.sale_label != blank -%}
+          <div class="nav-item nav-item--sale{% if section.settings.sale_menu != blank %} nav-item--mega{% endif %}">
+            <a href="{{ section.settings.sale_link | default: routes.all_products_collection_url }}" class="nav-item__link">
+              {{ section.settings.sale_label | escape }}
+            </a>
+            {%- if section.settings.sale_menu != blank -%}
+              <div class="mega-menu">
+                <div class="mega-menu__inner">
+                  <div>
+                    <p class="mega-menu__column-title">{{ section.settings.sale_label | escape }}</p>
+                    <ul class="mega-menu__list">
+                      {%- for link in section.settings.sale_menu.links -%}
+                        <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </nav>
     </div>
 
@@ -103,6 +125,23 @@
           <a href="{{ link.url }}">{{ link.title | escape }}</a>
         {%- endif -%}
       {%- endfor -%}
+
+      {%- if section.settings.sale_label != blank -%}
+        {%- if section.settings.sale_menu != blank -%}
+          <details>
+            <summary style="color: {{ settings.color_sale }};">{{ section.settings.sale_label | escape }}</summary>
+            <ul class="menu-drawer__sublist">
+              {%- for link in section.settings.sale_menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- else -%}
+          <a href="{{ section.settings.sale_link | default: routes.all_products_collection_url }}" style="color: {{ settings.color_sale }};">
+            {{ section.settings.sale_label | escape }}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
     </nav>
   </div>
 </div>
@@ -138,6 +177,29 @@
       "id": "menu",
       "label": "Menú",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Menú de ofertas"
+    },
+    {
+      "type": "text",
+      "id": "sale_label",
+      "label": "Etiqueta del menú de ofertas",
+      "default": "Ofertas",
+      "info": "Se resalta en el color de oferta del tema. Déjalo vacío para ocultarlo."
+    },
+    {
+      "type": "url",
+      "id": "sale_link",
+      "label": "Enlace principal de ofertas",
+      "info": "Apunta a la colección Outlet."
+    },
+    {
+      "type": "link_list",
+      "id": "sale_menu",
+      "label": "Submenú de ofertas",
+      "info": "Crea un menú de navegación (p. ej. con Outlet, Última talla, Conjuntos en oferta) y selecciónalo aquí."
     }
   ]
 }

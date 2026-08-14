@@ -1,11 +1,11 @@
 {
   "current": {
-    "color_background": "#FFFFFF",
-    "color_text": "#111111",
-    "color_accent": "#111111",
+    "color_background": "#FDFCF9",
+    "color_text": "#000000",
+    "color_accent": "#000000",
     "color_accent_text": "#FFFFFF",
-    "color_sale": "#B3261E",
-    "color_border": "#E5E2DD",
+    "color_sale": "#694E41",
+    "color_border": "#E4DCCA",
     "type_header_font": "assistant_n7",
     "type_body_font": "assistant_n4",
     "page_width": 1600,

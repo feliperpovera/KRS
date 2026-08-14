@@ -325,6 +325,15 @@ button {
   border-bottom-color: var(--color-text);
 }
 
+.nav-item--sale .nav-item__link {
+  color: var(--color-sale);
+}
+
+.nav-item--sale:hover .nav-item__link,
+.nav-item--sale:focus-within .nav-item__link {
+  border-bottom-color: var(--color-sale);
+}
+
 .mega-menu {
   position: absolute;
   top: 100%;
@@ -830,6 +839,42 @@ button {
   font-size: 1.5rem;
   opacity: 0.8;
   margin: 0 0 2.4rem;
+}
+
+/* ------------------------------------------------------------
+   Pilares de marca
+   ------------------------------------------------------------ */
+.pillars {
+  display: grid;
+  gap: 2.4rem;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .pillars {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+  }
+}
+
+.pillar__number {
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  opacity: 0.45;
+  margin: 0 0 0.8rem;
+}
+
+.pillar__title {
+  font-size: 1.3rem;
+  letter-spacing: 0.16em;
+  margin-bottom: 0.6rem;
+}
+
+.pillar__text {
+  font-size: 1.3rem;
+  opacity: 0.65;
+  margin: 0;
 }
 
 /* ------------------------------------------------------------

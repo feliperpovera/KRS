@@ -5,11 +5,53 @@
       "settings": {
         "height": "full",
         "alignment": "left",
-        "subheading": "Nueva colección",
-        "heading": "Del estudio a la calle",
-        "text": "Diseño técnico y estilo urbano para acompañarte todo el día.",
-        "button_label_1": "Comprar mujer",
-        "button_label_2": "Comprar hombre"
+        "subheading": "The life you live",
+        "heading": "Move beautifully",
+        "text": "Activewear premium nacido en Colombia, diseñado para la mujer que se mueve con elegancia, confianza e intención.",
+        "button_label_1": "Comprar novedades",
+        "button_label_2": "Best sellers"
+      }
+    },
+    "pillars": {
+      "type": "brand-pillars",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Fabricación propia",
+            "text": "Desarrollamos nuestras propias telas."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Diseño propio",
+            "text": "Cada prenda se diseña con intención."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Detalle",
+            "text": "Controlamos cada paso del proceso."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "title": "Calidad",
+            "text": "Nunca comprometemos lo que entregamos."
+          }
+        }
+      },
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3",
+        "pillar-4"
+      ],
+      "settings": {
+        "heading": "Nos importa cada detalle"
       }
     },
     "new-arrivals": {
@@ -24,14 +66,39 @@
     "shop-by-activity": {
       "type": "category-tiles",
       "blocks": {
-        "tile-1": { "type": "tile", "settings": { "title": "Yoga" } },
-        "tile-2": { "type": "tile", "settings": { "title": "Pilates" } },
-        "tile-3": { "type": "tile", "settings": { "title": "Running" } },
-        "tile-4": { "type": "tile", "settings": { "title": "Entrenamiento" } }
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "title": "Pilates"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "title": "Yoga"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "title": "Tennis"
+          }
+        },
+        "tile-4": {
+          "type": "tile",
+          "settings": {
+            "title": "Everyday"
+          }
+        }
       },
-      "block_order": ["tile-1", "tile-2", "tile-3", "tile-4"],
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3",
+        "tile-4"
+      ],
       "settings": {
-        "heading": "Comprar por actividad",
+        "heading": "Para la vida que vives",
         "columns": 4
       }
     },
@@ -39,9 +106,9 @@
       "type": "image-with-text",
       "settings": {
         "layout": "default",
-        "subheading": "Editorial",
-        "heading": "Imprescindibles de temporada",
-        "text": "<p>Prendas versátiles pensadas para el uso diario: del entrenamiento a la calle sin perder estilo.</p>",
+        "subheading": "Own design",
+        "heading": "Te mereces lo mejor",
+        "text": "<p>Prendas diseñadas con intención, hechas con telas propias, para acompañarte del pilates al café y del trabajo al viaje.</p>",
         "button_label": "Comprar best sellers"
       }
     },
@@ -57,13 +124,44 @@
     "shop-by-color": {
       "type": "category-tiles",
       "blocks": {
-        "color-1": { "type": "tile", "settings": { "title": "Negro" } },
-        "color-2": { "type": "tile", "settings": { "title": "Blanco" } },
-        "color-3": { "type": "tile", "settings": { "title": "Rosa" } },
-        "color-4": { "type": "tile", "settings": { "title": "Azul marino" } },
-        "color-5": { "type": "tile", "settings": { "title": "Tierra" } }
+        "color-1": {
+          "type": "tile",
+          "settings": {
+            "title": "Negro"
+          }
+        },
+        "color-2": {
+          "type": "tile",
+          "settings": {
+            "title": "Crema"
+          }
+        },
+        "color-3": {
+          "type": "tile",
+          "settings": {
+            "title": "Rosa"
+          }
+        },
+        "color-4": {
+          "type": "tile",
+          "settings": {
+            "title": "Cielo"
+          }
+        },
+        "color-5": {
+          "type": "tile",
+          "settings": {
+            "title": "Moka"
+          }
+        }
       },
-      "block_order": ["color-1", "color-2", "color-3", "color-4", "color-5"],
+      "block_order": [
+        "color-1",
+        "color-2",
+        "color-3",
+        "color-4",
+        "color-5"
+      ],
       "settings": {
         "heading": "Comprar por color",
         "columns": 5
@@ -73,8 +171,8 @@
       "type": "image-with-text",
       "settings": {
         "layout": "reverse",
-        "subheading": "Comunidad",
-        "heading": "¿Primera vez aquí?",
+        "subheading": "Made for your every day",
+        "heading": "¿Primera vez en KRS?",
         "text": "<p>Descubre los favoritos de la comunidad y encuentra tu talla ideal con nuestra guía.</p>",
         "button_label": "Comenzar aquí"
       }
@@ -82,13 +180,14 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "Únete a la comunidad",
-        "text": "Sé la primera persona en enterarte de lanzamientos, restocks y ofertas exclusivas."
+        "heading": "Únete al mundo KRS",
+        "text": "Lanzamientos, restocks y acceso anticipado a ofertas exclusivas, con la elegancia de siempre."
       }
     }
   },
   "order": [
     "hero",
+    "pillars",
     "new-arrivals",
     "shop-by-activity",
     "editorial-1",
