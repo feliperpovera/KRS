@@ -16,15 +16,15 @@
         "tab-details": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Detalles y cuidado",
-            "content": "<p>Agrega aquí la composición, la guía de cuidado o la información del producto.</p>"
+            "heading": "Details & care",
+            "content": "<p>Add fabric composition, care guide or product details here.</p>"
           }
         },
         "tab-shipping": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Envíos y devoluciones",
-            "content": "<p>Agrega aquí tu política de envíos y devoluciones.</p>"
+            "heading": "Shipping & returns",
+            "content": "<p>Add your shipping and returns policy here.</p>"
           }
         },
         "share": { "type": "share" }
@@ -46,7 +46,7 @@
     "related": {
       "type": "related-products",
       "settings": {
-        "heading": "También te puede gustar",
+        "heading": "You may also like",
         "products_to_show": 8
       }
     }

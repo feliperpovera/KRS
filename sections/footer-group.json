@@ -1,6 +1,6 @@
 {
   "type": "footer",
-  "name": "Grupo de pie de página",
+  "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
@@ -8,29 +8,29 @@
         "menu-1": {
           "type": "link_list",
           "settings": {
-            "heading": "Comprar",
+            "heading": "Shop",
             "menu": "footer"
           }
         },
         "menu-2": {
           "type": "link_list",
           "settings": {
-            "heading": "Ayuda",
+            "heading": "Help",
             "menu": "footer"
           }
         },
         "menu-3": {
           "type": "link_list",
           "settings": {
-            "heading": "Nosotros",
+            "heading": "About",
             "menu": "footer"
           }
         },
         "newsletter-1": {
           "type": "newsletter",
           "settings": {
-            "heading": "Únete a la comunidad",
-            "text": "Novedades, lanzamientos y ofertas exclusivas directamente en tu correo."
+            "heading": "Join the KRS world",
+            "text": "News, launches and exclusive offers straight to your inbox."
           }
         }
       },

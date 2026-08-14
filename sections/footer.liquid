@@ -52,7 +52,7 @@
     </div>
 
     <div class="footer__bottom">
-      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</span>
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
       {%- if section.settings.show_payment_icons -%}
         <div role="list" aria-label="{{ 'sections.footer.payment' | t }}" style="display:flex;gap:.6rem;flex-wrap:wrap;">
           {%- for type in shop.enabled_payment_types -%}
@@ -66,50 +66,50 @@
 
 {% schema %}
 {
-  "name": "Pie de página",
+  "name": "Footer",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "Mostrar íconos de pago",
+      "label": "Show payment icons",
       "default": true
     }
   ],
   "blocks": [
     {
       "type": "link_list",
-      "name": "Menú",
+      "name": "Menu",
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Título",
-          "default": "Comprar"
+          "label": "Title",
+          "default": "Shop"
         },
         {
           "type": "link_list",
           "id": "menu",
-          "label": "Menú",
+          "label": "Menu",
           "default": "footer"
         }
       ]
     },
     {
       "type": "newsletter",
-      "name": "Suscripción",
+      "name": "Newsletter",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Título",
-          "default": "Únete a la comunidad"
+          "label": "Title",
+          "default": "Join the KRS world"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Texto",
-          "default": "Novedades, lanzamientos y ofertas exclusivas directamente en tu correo."
+          "label": "Text",
+          "default": "News, launches and exclusive offers straight to your inbox."
         }
       ]
     }

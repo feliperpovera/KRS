@@ -8,65 +8,65 @@
     "theme_support_url": "https://help.shopify.com"
   },
   {
-    "name": "Colores",
+    "name": "Colors",
     "settings": [
       {
         "type": "color",
         "id": "color_background",
-        "label": "Fondo",
+        "label": "Background",
         "default": "#FFFFFF"
       },
       {
         "type": "color",
         "id": "color_text",
-        "label": "Texto",
+        "label": "Text",
         "default": "#111111"
       },
       {
         "type": "color",
         "id": "color_accent",
-        "label": "Botones (fondo)",
+        "label": "Buttons (background)",
         "default": "#111111"
       },
       {
         "type": "color",
         "id": "color_accent_text",
-        "label": "Botones (texto)",
+        "label": "Buttons (text)",
         "default": "#FFFFFF"
       },
       {
         "type": "color",
         "id": "color_sale",
-        "label": "Precio en oferta",
+        "label": "Sale price",
         "default": "#B3261E"
       },
       {
         "type": "color",
         "id": "color_border",
-        "label": "Bordes y líneas",
+        "label": "Borders & lines",
         "default": "#E5E2DD"
       }
     ]
   },
   {
-    "name": "Tipografía",
+    "name": "Typography",
     "settings": [
       {
         "type": "font_picker",
         "id": "type_header_font",
-        "label": "Fuente de encabezados",
+        "label": "Heading font",
         "default": "assistant_n7"
       },
       {
         "type": "font_picker",
         "id": "type_body_font",
-        "label": "Fuente de cuerpo",
+        "label": "Body font",
         "default": "assistant_n4"
       }
     ]
   },
   {
-    "name": "Diseño",
+    "name": "Layout",
     "settings": [
       {
         "type": "range",
@@ -75,7 +75,7 @@
         "max": 1800,
         "step": 100,
         "unit": "px",
-        "label": "Ancho máximo de página",
+        "label": "Max page width",
         "default": 1600
       },
       {
@@ -85,7 +85,7 @@
         "max": 40,
         "step": 2,
         "unit": "px",
-        "label": "Radio de botones",
+        "label": "Button radius",
         "default": 0
       },
       {
@@ -95,7 +95,7 @@
         "max": 24,
         "step": 2,
         "unit": "px",
-        "label": "Radio de tarjetas e imágenes",
+        "label": "Card & image radius",
         "default": 0
       }
     ]
@@ -106,13 +106,13 @@
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Imagen de favicon",
-        "info": "Se reducirá a 32 x 32 px"
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32 px"
       }
     ]
   },
   {
-    "name": "Redes sociales",
+    "name": "Social media",
     "settings": [
       {
         "type": "text",

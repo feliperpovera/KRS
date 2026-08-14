@@ -165,7 +165,7 @@
 
 {% schema %}
 {
-  "name": "Encabezado",
+  "name": "Header",
   "settings": [
     {
       "type": "image_picker",
@@ -175,31 +175,31 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Menú",
+      "label": "Menu",
       "default": "main-menu"
     },
     {
       "type": "header",
-      "content": "Menú de ofertas"
+      "content": "Sale menu"
     },
     {
       "type": "text",
       "id": "sale_label",
-      "label": "Etiqueta del menú de ofertas",
-      "default": "Ofertas",
-      "info": "Se resalta en el color de oferta del tema. Déjalo vacío para ocultarlo."
+      "label": "Sale menu label",
+      "default": "Sale",
+      "info": "Highlighted in the theme's sale color. Leave empty to hide it."
     },
     {
       "type": "url",
       "id": "sale_link",
-      "label": "Enlace principal de ofertas",
-      "info": "Apunta a la colección Outlet."
+      "label": "Main sale link",
+      "info": "Point it to the Outlet collection."
     },
     {
       "type": "link_list",
       "id": "sale_menu",
-      "label": "Submenú de ofertas",
-      "info": "Crea un menú de navegación (p. ej. con Outlet, Última talla, Conjuntos en oferta) y selecciónalo aquí."
+      "label": "Sale dropdown menu",
+      "info": "Create a navigation menu (e.g. Outlet, Last sizes, Sets on sale) and select it here."
     }
   ]
 }

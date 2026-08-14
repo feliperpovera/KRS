@@ -34,7 +34,7 @@
                     {%- endfor -%}
                   {%- when 'price_range' -%}
                     <label>
-                      Desde
+                      From
                       <input
                         type="number"
                         name="{{ filter.min_value.param_name }}"
@@ -44,7 +44,7 @@
                       >
                     </label>
                     <label>
-                      Hasta
+                      To
                       <input
                         type="number"
                         name="{{ filter.max_value.param_name }}"
@@ -128,7 +128,7 @@
 
 {% schema %}
 {
-  "name": "Colección principal",
+  "name": "Main collection",
   "settings": [
     {
       "type": "range",
@@ -136,19 +136,19 @@
       "min": 8,
       "max": 48,
       "step": 4,
-      "label": "Productos por página",
+      "label": "Products per page",
       "default": 24
     },
     {
       "type": "checkbox",
       "id": "enable_filtering",
-      "label": "Habilitar filtros",
+      "label": "Enable filtering",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
-      "label": "Habilitar ordenamiento",
+      "label": "Enable sorting",
       "default": true
     }
   ]

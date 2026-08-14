@@ -157,7 +157,7 @@
               onclick="navigator.share ? navigator.share({ url: window.location.href, title: document.title }) : navigator.clipboard.writeText(window.location.href); return false;"
               {{ block.shopify_attributes }}
             >
-              {{ block.settings.share_label | default: 'Compartir' | escape }}
+              {{ block.settings.share_label | default: 'Share' | escape }}
             </a>
         {%- endcase -%}
       {%- endfor -%}
@@ -167,55 +167,55 @@
 
 {% schema %}
 {
-  "name": "Producto principal",
+  "name": "Main product",
   "blocks": [
-    { "type": "vendor", "name": "Marca", "limit": 1 },
-    { "type": "title", "name": "Título", "limit": 1 },
-    { "type": "price", "name": "Precio", "limit": 1 },
-    { "type": "variant_picker", "name": "Selector de variantes", "limit": 1 },
-    { "type": "quantity_selector", "name": "Selector de cantidad", "limit": 1 },
+    { "type": "vendor", "name": "Vendor", "limit": 1 },
+    { "type": "title", "name": "Title", "limit": 1 },
+    { "type": "price", "name": "Price", "limit": 1 },
+    { "type": "variant_picker", "name": "Variant picker", "limit": 1 },
+    { "type": "quantity_selector", "name": "Quantity selector", "limit": 1 },
     {
       "type": "buy_buttons",
-      "name": "Botones de compra",
+      "name": "Buy buttons",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_dynamic_checkout",
-          "label": "Mostrar botones de pago dinámico",
+          "label": "Show dynamic checkout buttons",
           "default": true
         }
       ]
     },
-    { "type": "description", "name": "Descripción", "limit": 1 },
+    { "type": "description", "name": "Description", "limit": 1 },
     {
       "type": "collapsible_tab",
-      "name": "Pestaña desplegable",
+      "name": "Collapsible tab",
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Título",
-          "default": "Detalles y cuidado"
+          "label": "Title",
+          "default": "Details & care"
         },
         {
           "type": "richtext",
           "id": "content",
           "label": "Contenido",
-          "default": "<p>Agrega aquí la composición, la guía de cuidado o la información de envíos.</p>"
+          "default": "<p>Add fabric composition, care guide or shipping details here.</p>"
         }
       ]
     },
     {
       "type": "share",
-      "name": "Compartir",
+      "name": "Share",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "share_label",
-          "label": "Etiqueta",
-          "default": "Compartir"
+          "label": "Label",
+          "default": "Share"
         }
       ]
     }

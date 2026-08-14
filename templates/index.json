@@ -7,8 +7,8 @@
         "alignment": "left",
         "subheading": "The life you live",
         "heading": "Move beautifully",
-        "text": "Activewear premium nacido en Colombia, diseñado para la mujer que se mueve con elegancia, confianza e intención.",
-        "button_label_1": "Comprar novedades",
+        "text": "Premium activewear born in Colombia, designed for the modern woman who moves through life with elegance, confidence and intention.",
+        "button_label_1": "Shop new in",
         "button_label_2": "Best sellers"
       }
     },
@@ -18,29 +18,29 @@
         "pillar-1": {
           "type": "pillar",
           "settings": {
-            "title": "Fabricación propia",
-            "text": "Desarrollamos nuestras propias telas."
+            "title": "Own fabrication",
+            "text": "We develop our own fabrics."
           }
         },
         "pillar-2": {
           "type": "pillar",
           "settings": {
-            "title": "Diseño propio",
-            "text": "Cada prenda se diseña con intención."
+            "title": "Own design",
+            "text": "Every piece is designed with intention."
           }
         },
         "pillar-3": {
           "type": "pillar",
           "settings": {
-            "title": "Detalle",
-            "text": "Controlamos cada paso del proceso."
+            "title": "Detail",
+            "text": "We control every step of the process."
           }
         },
         "pillar-4": {
           "type": "pillar",
           "settings": {
-            "title": "Calidad",
-            "text": "Nunca comprometemos lo que entregamos."
+            "title": "Quality",
+            "text": "We never compromise on what we deliver."
           }
         }
       },
@@ -51,16 +51,16 @@
         "pillar-4"
       ],
       "settings": {
-        "heading": "Nos importa cada detalle"
+        "heading": "We care about every detail"
       }
     },
     "new-arrivals": {
       "type": "featured-collection",
       "settings": {
-        "heading": "Novedades",
+        "heading": "New in",
         "products_to_show": 8,
         "show_view_all": true,
-        "view_all_label": "Ver todo"
+        "view_all_label": "View all"
       }
     },
     "shop-by-activity": {
@@ -98,7 +98,7 @@
         "tile-4"
       ],
       "settings": {
-        "heading": "Para la vida que vives",
+        "heading": "For the life you live",
         "columns": 4
       }
     },
@@ -107,9 +107,9 @@
       "settings": {
         "layout": "default",
         "subheading": "Own design",
-        "heading": "Te mereces lo mejor",
-        "text": "<p>Prendas diseñadas con intención, hechas con telas propias, para acompañarte del pilates al café y del trabajo al viaje.</p>",
-        "button_label": "Comprar best sellers"
+        "heading": "You deserve the best",
+        "text": "<p>Pieces designed with intention, made with our own fabrics, to take you from pilates to coffee and from work to travel.</p>",
+        "button_label": "Shop best sellers"
       }
     },
     "best-sellers": {
@@ -118,7 +118,7 @@
         "heading": "Best sellers",
         "products_to_show": 8,
         "show_view_all": true,
-        "view_all_label": "Ver todo"
+        "view_all_label": "View all"
       }
     },
     "shop-by-color": {
@@ -127,31 +127,31 @@
         "color-1": {
           "type": "tile",
           "settings": {
-            "title": "Negro"
+            "title": "Black"
           }
         },
         "color-2": {
           "type": "tile",
           "settings": {
-            "title": "Crema"
+            "title": "Cream"
           }
         },
         "color-3": {
           "type": "tile",
           "settings": {
-            "title": "Rosa"
+            "title": "Pink"
           }
         },
         "color-4": {
           "type": "tile",
           "settings": {
-            "title": "Cielo"
+            "title": "Sky"
           }
         },
         "color-5": {
           "type": "tile",
           "settings": {
-            "title": "Moka"
+            "title": "Mocha"
           }
         }
       },
@@ -163,7 +163,7 @@
         "color-5"
       ],
       "settings": {
-        "heading": "Comprar por color",
+        "heading": "Shop by color",
         "columns": 5
       }
     },
@@ -172,16 +172,16 @@
       "settings": {
         "layout": "reverse",
         "subheading": "Made for your every day",
-        "heading": "¿Primera vez en KRS?",
-        "text": "<p>Descubre los favoritos de la comunidad y encuentra tu talla ideal con nuestra guía.</p>",
-        "button_label": "Comenzar aquí"
+        "heading": "First time at KRS?",
+        "text": "<p>Discover the community's favorites and find your perfect size with our guide.</p>",
+        "button_label": "Start here"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "Únete al mundo KRS",
-        "text": "Lanzamientos, restocks y acceso anticipado a ofertas exclusivas, con la elegancia de siempre."
+        "heading": "Join the KRS world",
+        "text": "Launches, restocks and early access to exclusive offers, always with elegance."
       }
     }
   },
