@@ -1,0 +1,283 @@
+{%- comment -%}
+  Pop-up de bienvenida: captura el correo, suscribe al newsletter
+  y muestra el código de descuento de primera compra.
+  El código debe existir en Shopify (Descuentos > Crear descuento).
+{%- endcomment -%}
+
+{%- if section.settings.enable -%}
+  <style>
+    .np-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.6rem;
+    }
+    .np-popup.is-open { display: flex; }
+    .np-popup__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .np-popup__card {
+      position: relative;
+      z-index: 2;
+      width: min(44rem, 100%);
+      background: var(--color-background);
+      padding: 4rem 3.2rem 3.2rem;
+      text-align: center;
+      border: 1px solid var(--color-border);
+    }
+    .np-popup__close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      padding: 0.6rem;
+      color: var(--color-text);
+    }
+    .np-popup__close svg { width: 1.8rem; height: 1.8rem; }
+    .np-popup__eyebrow {
+      font-size: 1.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-sale);
+      margin: 0 0 1rem;
+    }
+    .np-popup__heading { font-size: 2.2rem; margin-bottom: 1rem; }
+    .np-popup__text { font-size: 1.4rem; opacity: 0.7; margin: 0 0 2rem; }
+    .np-popup__form { display: flex; flex-direction: column; gap: 1rem; }
+    .np-popup__form input[type='email'] {
+      min-height: 4.6rem;
+      padding: 0 1.6rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-button);
+      font-size: 1.4rem;
+      font-family: inherit;
+      background: var(--color-background);
+      color: var(--color-text);
+      text-align: center;
+    }
+    .np-popup__legal { font-size: 1.1rem; opacity: 0.5; margin: 1.4rem 0 0; }
+    .np-popup__code {
+      display: block;
+      margin: 2rem auto 0.8rem;
+      padding: 1.4rem;
+      border: 1px dashed var(--color-sale);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--color-sale);
+      cursor: pointer;
+      background: none;
+      width: 100%;
+    }
+    .np-popup__copy-hint { font-size: 1.1rem; opacity: 0.5; }
+  </style>
+
+  <newsletter-popup
+    id="NewsletterPopup"
+    class="np-popup"
+    data-delay="{{ section.settings.delay }}"
+    data-frequency-days="{{ section.settings.frequency_days }}"
+    {% if form.posted_successfully? %}data-success{% endif %}
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ section.settings.heading | escape }}"
+  >
+    <div class="np-popup__overlay" data-np-close></div>
+    <div class="np-popup__card">
+      <button type="button" class="np-popup__close" data-np-close aria-label="{{ 'accessibility.close' | t }}">
+        {% render 'icon', icon: 'close' %}
+      </button>
+
+      {%- form 'customer', id: 'NewsletterPopupForm' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="np-popup__eyebrow">{{ section.settings.success_eyebrow | escape }}</p>
+          <h2 class="np-popup__heading">{{ section.settings.success_heading | escape }}</h2>
+          <p class="np-popup__text">{{ section.settings.success_text | escape }}</p>
+          <button type="button" class="np-popup__code" data-np-code="{{ section.settings.discount_code | escape }}">
+            {{ section.settings.discount_code | escape }}
+          </button>
+          <p class="np-popup__copy-hint">{{ section.settings.copy_hint | escape }}</p>
+        {%- else -%}
+          <p class="np-popup__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h2 class="np-popup__heading">{{ section.settings.heading | escape }}</h2>
+          <p class="np-popup__text">{{ section.settings.text | escape }}</p>
+          <div class="np-popup__form">
+            <input type="hidden" name="contact[tags]" value="newsletter,popup">
+            <input
+              type="email"
+              name="contact[email]"
+              required
+              placeholder="{{ 'newsletter.label' | t }}"
+              aria-label="{{ 'newsletter.label' | t }}"
+              autocomplete="email"
+            >
+            <button type="submit" class="button button--full-width">{{ section.settings.button_label | escape }}</button>
+          </div>
+          <p class="np-popup__legal">{{ section.settings.legal | escape }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </newsletter-popup>
+
+  <script>
+    if (!customElements.get('newsletter-popup')) {
+      customElements.define(
+        'newsletter-popup',
+        class NewsletterPopup extends HTMLElement {
+          connectedCallback() {
+            this.storageKey = 'krs-newsletter-popup';
+            this.querySelectorAll('[data-np-close]').forEach((el) =>
+              el.addEventListener('click', () => this.close())
+            );
+            const codeBtn = this.querySelector('[data-np-code]');
+            if (codeBtn) {
+              codeBtn.addEventListener('click', () => {
+                navigator.clipboard && navigator.clipboard.writeText(codeBtn.dataset.npCode);
+                codeBtn.style.opacity = '0.6';
+              });
+            }
+
+            if (this.hasAttribute('data-success')) {
+              this.open();
+              try { localStorage.setItem(this.storageKey, 'subscribed'); } catch (e) {}
+              return;
+            }
+
+            try {
+              const stored = localStorage.getItem(this.storageKey);
+              if (stored === 'subscribed') return;
+              if (stored) {
+                const days = parseInt(this.dataset.frequencyDays, 10) || 7;
+                if (Date.now() - parseInt(stored, 10) < days * 864e5) return;
+              }
+            } catch (e) {}
+
+            setTimeout(() => this.open(), (parseInt(this.dataset.delay, 10) || 3) * 1000);
+          }
+
+          open() {
+            this.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            const input = this.querySelector('input[type="email"]');
+            if (input) input.focus();
+          }
+
+          close() {
+            this.classList.remove('is-open');
+            document.body.style.overflow = '';
+            try {
+              if (!this.hasAttribute('data-success')) {
+                localStorage.setItem(this.storageKey, String(Date.now()));
+              }
+            } catch (e) {}
+          }
+        }
+      );
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Pop-up de bienvenida",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Activar pop-up",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "label": "Retraso al entrar",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "frequency_days",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "label": "Volver a mostrar después de (días)",
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta superior",
+      "default": "KRS World"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "20% en tu primera compra"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto",
+      "default": "Suscríbete al newsletter y recibe tu código de bienvenida, además de lanzamientos y acceso anticipado."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botón",
+      "default": "Quiero mi 20%"
+    },
+    {
+      "type": "text",
+      "id": "legal",
+      "label": "Texto legal",
+      "default": "Válido solo para tu primera compra. Puedes darte de baja cuando quieras."
+    },
+    {
+      "type": "header",
+      "content": "Estado de éxito"
+    },
+    {
+      "type": "text",
+      "id": "success_eyebrow",
+      "label": "Etiqueta superior (éxito)",
+      "default": "Bienvenida a KRS"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Título (éxito)",
+      "default": "Este es tu código"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Texto (éxito)",
+      "default": "Úsalo al finalizar tu primera compra. También te lo enviamos por correo."
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Código de descuento",
+      "default": "KRS20",
+      "info": "Debe existir en Descuentos. Se creó KRS20 (20%, una vez por cliente)."
+    },
+    {
+      "type": "text",
+      "id": "copy_hint",
+      "label": "Texto de copiar",
+      "default": "Toca el código para copiarlo"
+    }
+  ]
+}
+{% endschema %}
