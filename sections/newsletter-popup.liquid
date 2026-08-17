@@ -25,10 +25,49 @@
       position: relative;
       z-index: 2;
       width: min(44rem, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
       background: var(--color-background);
+      border: 1px solid var(--color-border);
+    }
+    .np-popup__body {
       padding: 4rem 3.2rem 3.2rem;
       text-align: center;
-      border: 1px solid var(--color-border);
+    }
+    .np-popup__media {
+      display: none;
+      background: var(--color-border);
+    }
+    .np-popup__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .np-popup__card--with-image {
+      width: min(76rem, 100%);
+    }
+    @media screen and (min-width: 750px) {
+      .np-popup__card--with-image {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+      }
+      .np-popup__card--with-image .np-popup__media {
+        display: block;
+      }
+      .np-popup__card--with-image .np-popup__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        padding: 4rem 3.6rem;
+      }
+      .np-popup__card--with-image .np-popup__form input[type='email'] {
+        text-align: left;
+      }
+      .np-popup__card--with-image .np-popup__code {
+        margin-left: 0;
+      }
     }
     .np-popup__close {
       position: absolute;
@@ -89,11 +128,22 @@
     aria-label="{{ section.settings.heading | escape }}"
   >
     <div class="np-popup__overlay" data-np-close></div>
-    <div class="np-popup__card">
+    <div class="np-popup__card{% if section.settings.image != blank %} np-popup__card--with-image{% endif %}">
       <button type="button" class="np-popup__close" data-np-close aria-label="{{ 'accessibility.close' | t }}">
         {% render 'icon', icon: 'close' %}
       </button>
 
+      {%- if section.settings.image != blank -%}
+        <div class="np-popup__media">
+          {{
+            section.settings.image
+            | image_url: width: 900
+            | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 750px) 38rem, 100vw', alt: section.settings.heading
+          }}
+        </div>
+      {%- endif -%}
+
+      <div class="np-popup__body">
       {%- form 'customer', id: 'NewsletterPopupForm' -%}
         {%- if form.posted_successfully? -%}
           <p class="np-popup__eyebrow">{{ section.settings.success_eyebrow | escape }}</p>
@@ -122,6 +172,7 @@
           <p class="np-popup__legal">{{ section.settings.legal | escape }}</p>
         {%- endif -%}
       {%- endform -%}
+      </div>
     </div>
   </newsletter-popup>
 
@@ -212,6 +263,12 @@
       "unit": "d",
       "label": "Show again after (days)",
       "default": 7
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Vertical image shown beside the form on desktop. Recommended: 900 x 1125 px (4:5)."
     },
     {
       "type": "text",
