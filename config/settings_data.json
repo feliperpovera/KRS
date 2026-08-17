@@ -10,6 +10,7 @@
     "type_body_font": "assistant_n4",
     "page_width": 1600,
     "button_radius": 0,
-    "card_radius": 0
+    "card_radius": 0,
+    "color_swatches": "White: #FFFFFF\nBlack: #111111\nCream: #FFEFCB\nBeige: #E4DCCA\nSoft Pink: #FFDFFA\nPink: #FFDFFA\nSky: #D7E6FF\nMocha: #694E41\nNavy: #2A3350\nOlive: #6B6A4B\nGrey: #9A9A9A\nSand: #D9CDBA"
   }
 }

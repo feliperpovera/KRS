@@ -243,6 +243,9 @@ class VariantSelects extends HTMLElement {
   onVariantChange() {
     const options = Array.from(this.querySelectorAll('fieldset')).map((fieldset) => {
       const checked = fieldset.querySelector('input:checked');
+      // Refleja el valor elegido junto a la etiqueta (p. ej. "Color: Soft Pink")
+      const selectedLabel = fieldset.querySelector('[data-selected-for]');
+      if (selectedLabel && checked) selectedLabel.textContent = checked.value;
       return checked ? checked.value : null;
     });
 

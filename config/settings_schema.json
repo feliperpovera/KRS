@@ -101,6 +101,18 @@
     ]
   },
   {
+    "name": "Color swatches",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "color_swatches",
+        "label": "Color map",
+        "info": "One per line, as name: hex. The option value must match the name exactly (case-insensitive). Shopify's native swatches take priority when set.",
+        "default": "White: #FFFFFF\nBlack: #111111\nCream: #FFEFCB\nBeige: #E4DCCA\nSoft Pink: #FFDFFA\nPink: #FFDFFA\nSky: #D7E6FF\nMocha: #694E41\nNavy: #2A3350\nOlive: #6B6A4B\nGrey: #9A9A9A\nSand: #D9CDBA"
+      }
+    ]
+  },
+  {
     "name": "Favicon",
     "settings": [
       {

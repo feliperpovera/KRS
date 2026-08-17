@@ -1095,6 +1095,52 @@ button {
   outline-offset: 2px;
 }
 
+/* Muestras de color circulares */
+.variant-options--swatch {
+  gap: 1.2rem;
+}
+
+.variant-options--swatch label.swatch {
+  width: 4rem;
+  height: 4rem;
+  /* La regla base fija min-width/min-height: hay que anularlas o el círculo sale ovalado */
+  min-width: 0;
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.variant-options--swatch label.swatch:hover {
+  transform: scale(1.06);
+}
+
+/* El anillo de selección no tapa el color: va por fuera del círculo */
+.variant-options--swatch input:checked + label.swatch {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 3px var(--color-text);
+}
+
+.variant-options--swatch input:focus-visible + label.swatch {
+  outline: 2px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+.product-form__selected {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.65;
+  margin-left: 0.4rem;
+}
+
 .product__description {
   margin-top: 2.4rem;
   font-size: 1.4rem;

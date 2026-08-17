@@ -52,10 +52,53 @@
             {%- unless product.has_only_default_variant -%}
               <variant-selects {{ block.shopify_attributes }}>
                 {%- for option in product.options_with_values -%}
+                  {%- liquid
+                    assign option_key = option.name | downcase
+                    assign is_swatch = false
+                    if option_key contains 'color' or option_key contains 'colour'
+                      assign is_swatch = true
+                    endif
+                  -%}
                   <fieldset class="product-form__input">
-                    <legend class="product-form__label">{{ option.name | escape }}</legend>
-                    <div class="variant-options">
+                    <legend class="product-form__label">
+                      {{ option.name | escape }}
+                      {%- if is_swatch and option.selected_value != blank -%}
+                        <span class="product-form__selected" data-selected-for="{{ option.position }}">
+                          {{ option.selected_value | escape }}
+                        </span>
+                      {%- endif -%}
+                    </legend>
+                    <div class="variant-options{% if is_swatch %} variant-options--swatch{% endif %}">
                       {%- for value in option.values -%}
+                        {%- liquid
+                          assign swatch_style = ''
+                          if is_swatch
+                            if value.swatch.image != blank
+                              assign swatch_image = value.swatch.image | image_url: width: 120
+                              assign swatch_style = 'background-image:url(' | append: swatch_image | append: ')'
+                            elsif value.swatch.color != blank
+                              assign swatch_style = 'background-color:' | append: value.swatch.color
+                            else
+                              assign value_key = value | downcase | strip
+                              assign swatch_hex = ''
+                              assign swatch_pairs = settings.color_swatches | newline_to_br | split: '<br />'
+                              for pair in swatch_pairs
+                                assign kv = pair | strip | split: ':'
+                                if kv.size == 2
+                                  assign kv_name = kv[0] | downcase | strip
+                                  if kv_name == value_key
+                                    assign swatch_hex = kv[1] | strip
+                                    break
+                                  endif
+                                endif
+                              endfor
+                              if swatch_hex == blank
+                                assign swatch_hex = value_key | replace: ' ', '' | replace: '-', ''
+                              endif
+                              assign swatch_style = 'background-color:' | append: swatch_hex
+                            endif
+                          endif
+                        -%}
                         <input
                           type="radio"
                           id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
@@ -63,8 +106,19 @@
                           value="{{ value | escape }}"
                           {% if option.selected_value == value %}checked{% endif %}
                         >
-                        <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                          {{ value | escape }}
+                        <label
+                          for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                          {% if is_swatch %}
+                            class="swatch"
+                            style="{{ swatch_style }}"
+                            title="{{ value | escape }}"
+                          {% endif %}
+                        >
+                          {%- if is_swatch -%}
+                            <span class="visually-hidden">{{ value | escape }}</span>
+                          {%- else -%}
+                            {{ value | escape }}
+                          {%- endif -%}
                         </label>
                       {%- endfor -%}
                     </div>
