@@ -64,7 +64,7 @@
       {%- if section.settings.logo != blank -%}
         {{
           section.settings.logo
-          | image_url: width: 300
+          | image_url: width: 600
           | image_tag: alt: shop.name, width: section.settings.logo.width, height: section.settings.logo.height
         }}
       {%- else -%}

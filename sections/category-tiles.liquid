@@ -25,13 +25,13 @@
           {%- if block.settings.image != blank -%}
             {{
               block.settings.image
-              | image_url: width: 900
-              | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 25vw, 50vw', widths: '360, 540, 720, 900', alt: tile_title
+              | image_url: width: 1200
+              | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 25vw, 50vw', widths: '400, 600, 800, 1200', alt: tile_title
             }}
           {%- elsif block.settings.collection.featured_image != blank -%}
             {{
               block.settings.collection.featured_image
-              | image_url: width: 900
+              | image_url: width: 1200
               | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 25vw, 50vw', alt: tile_title
             }}
           {%- else -%}
@@ -88,7 +88,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image",
-          "info": "Overrides the collection image. Recommended: 900 x 1200 px."
+          "info": "Overrides the collection image. Recommended: 1200 x 1600 px (3:4)."
         },
         {
           "type": "text",

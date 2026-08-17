@@ -11,9 +11,9 @@
           <source
             media="(max-width: 749px)"
             srcset="
-              {{ section.settings.image_mobile | image_url: width: 750 }} 750w,
-              {{ section.settings.image_mobile | image_url: width: 1200 }} 1200w,
-              {{ section.settings.image_mobile | image_url: width: 1600 }} 1600w
+              {{ section.settings.image_mobile | image_url: width: 600 }} 600w,
+              {{ section.settings.image_mobile | image_url: width: 900 }} 900w,
+              {{ section.settings.image_mobile | image_url: width: 1200 }} 1200w
             "
             sizes="100vw"
           >
@@ -75,7 +75,7 @@
       "type": "image_picker",
       "id": "image_mobile",
       "label": "Background image (mobile)",
-      "info": "Vertical crop for phones. Recommended: 1200 x 1600 px. Falls back to the desktop image if empty."
+      "info": "Vertical crop for phones. Recommended: 1200 x 1600 px (3:4). Falls back to the desktop image if empty."
     },
     {
       "type": "video",
