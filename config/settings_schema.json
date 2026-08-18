@@ -37,8 +37,8 @@
       {
         "type": "color",
         "id": "color_sale",
-        "label": "Sale price",
-        "default": "#B3261E"
+        "label": "Sale price & sale menu",
+        "default": "#C8102E"
       },
       {
         "type": "color",
@@ -55,13 +55,13 @@
         "type": "font_picker",
         "id": "type_header_font",
         "label": "Heading font",
-        "default": "assistant_n7"
+        "default": "oswald_n6"
       },
       {
         "type": "font_picker",
         "id": "type_body_font",
         "label": "Body font",
-        "default": "assistant_n4"
+        "default": "montserrat_n4"
       }
     ]
   },

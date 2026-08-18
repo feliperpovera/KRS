@@ -187,11 +187,11 @@
   },
   "order": [
     "hero",
+    "best-sellers",
     "pillars",
     "new-arrivals",
     "shop-by-activity",
     "editorial-1",
-    "best-sellers",
     "shop-by-color",
     "editorial-2",
     "newsletter"

@@ -3,16 +3,30 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": { "type": "vendor" },
-        "title": { "type": "title" },
-        "price": { "type": "price" },
-        "variant_picker": { "type": "variant_picker" },
-        "quantity_selector": { "type": "quantity_selector" },
+        "vendor": {
+          "type": "vendor"
+        },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker"
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": { "show_dynamic_checkout": true }
+          "settings": {
+            "show_dynamic_checkout": true
+          }
         },
-        "description": { "type": "description" },
+        "description": {
+          "type": "description"
+        },
         "tab-details": {
           "type": "collapsible_tab",
           "settings": {
@@ -27,13 +41,19 @@
             "content": "<p>Add your shipping and returns policy here.</p>"
           }
         },
-        "share": { "type": "share" }
+        "share": {
+          "type": "share"
+        },
+        "size_guide": {
+          "type": "size_guide"
+        }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
         "variant_picker",
+        "size_guide",
         "quantity_selector",
         "buy_buttons",
         "description",
@@ -51,5 +71,8 @@
       }
     }
   },
-  "order": ["main", "related"]
+  "order": [
+    "main",
+    "related"
+  ]
 }

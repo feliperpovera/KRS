@@ -142,6 +142,41 @@
               </variant-selects>
             {%- endunless -%}
 
+          {%- when 'size_guide' -%}
+            <div class="product-form__input" style="margin-top:-0.8rem;" {{ block.shopify_attributes }}>
+              <drawer-toggle data-target="SizeGuide-{{ section.id }}">
+                <button type="button" class="size-guide__trigger" aria-controls="SizeGuide-{{ section.id }}">
+                  {{ block.settings.label | escape }}
+                </button>
+              </drawer-toggle>
+            </div>
+            <div id="SizeGuide-{{ section.id }}" class="size-guide-modal" role="dialog" aria-modal="true" aria-label="{{ block.settings.label | escape }}">
+              <div class="size-guide-modal__overlay" data-drawer-close></div>
+              <div class="size-guide-modal__panel">
+                <button type="button" class="size-guide-modal__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+                  {% render 'icon', icon: 'close' %}
+                </button>
+                <h2 class="size-guide-modal__title">{{ block.settings.label | escape }}</h2>
+                {%- if block.settings.page != blank -%}
+                  <div class="rte">{{ block.settings.page.content }}</div>
+                {%- else -%}
+                  <table class="size-guide-table">
+                    <thead>
+                      <tr><th>Size</th><th>US</th><th>Bust (in)</th><th>Waist (in)</th><th>Hip (in)</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>XS</td><td>0&ndash;2</td><td>31&ndash;33</td><td>24&ndash;26</td><td>34&ndash;36</td></tr>
+                      <tr><td>S</td><td>4&ndash;6</td><td>33&ndash;35</td><td>26&ndash;28</td><td>36&ndash;38</td></tr>
+                      <tr><td>M</td><td>8&ndash;10</td><td>35&ndash;37</td><td>28&ndash;30</td><td>38&ndash;40</td></tr>
+                      <tr><td>L</td><td>12&ndash;14</td><td>37&ndash;40</td><td>30&ndash;33</td><td>40&ndash;43</td></tr>
+                      <tr><td>XL</td><td>16&ndash;18</td><td>40&ndash;43</td><td>33&ndash;36</td><td>43&ndash;46</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="size-guide-modal__note">{{ block.settings.note | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+
           {%- when 'quantity_selector' -%}
             <div class="product-form__input" {{ block.shopify_attributes }}>
               <label class="product-form__label" for="Quantity-{{ section.id }}">
@@ -234,6 +269,31 @@
     { "type": "price", "name": "Price", "limit": 1 },
     { "type": "variant_picker", "name": "Variant picker", "limit": 1 },
     { "type": "quantity_selector", "name": "Quantity selector", "limit": 1 },
+    {
+      "type": "size_guide",
+      "name": "Size guide",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Size guide"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Size guide page",
+          "info": "Optional. Replaces the built-in table with the content of this page."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under the table",
+          "default": "Measurements in inches. Between sizes? Size down for a compressive fit."
+        }
+      ]
+    },
     {
       "type": "buy_buttons",
       "name": "Buy buttons",

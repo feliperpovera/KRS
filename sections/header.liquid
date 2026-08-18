@@ -1,3 +1,14 @@
+{%- style -%}
+  .header__logo img {
+    max-height: {{ section.settings.logo_height | default: 40 }}px;
+  }
+  @media screen and (max-width: 749px) {
+    .header__logo img {
+      max-height: {{ section.settings.logo_height_mobile | default: 28 }}px;
+    }
+  }
+{%- endstyle -%}
+
 <sticky-header class="header-wrapper">
   <header class="header page-width">
     <div style="display:flex;align-items:center;gap:1rem;">
@@ -62,11 +73,22 @@
 
     <a href="{{ routes.root_url }}" class="header__logo">
       {%- if section.settings.logo != blank -%}
-        {{
-          section.settings.logo
-          | image_url: width: 600
-          | image_tag: alt: shop.name, width: section.settings.logo.width, height: section.settings.logo.height
-        }}
+        {%- if section.settings.logo_mobile != blank -%}
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ section.settings.logo_mobile | image_url: width: 400 }}">
+            {{
+              section.settings.logo
+              | image_url: width: 600
+              | image_tag: alt: shop.name, width: section.settings.logo.width, height: section.settings.logo.height
+            }}
+          </picture>
+        {%- else -%}
+          {{
+            section.settings.logo
+            | image_url: width: 600
+            | image_tag: alt: shop.name, width: section.settings.logo.width, height: section.settings.logo.height
+          }}
+        {%- endif -%}
       {%- else -%}
         {{ shop.name }}
       {%- endif -%}
@@ -170,7 +192,33 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo"
+      "label": "Logo (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Logo (mobile)",
+      "info": "Optional. Use the K seal or a shorter mark for small screens. Falls back to the desktop logo."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo height (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo height (mobile)",
+      "default": 28
     },
     {
       "type": "link_list",
