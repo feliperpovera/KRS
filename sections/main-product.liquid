@@ -51,6 +51,8 @@
           {%- when 'variant_picker' -%}
             {%- unless product.has_only_default_variant -%}
               <variant-selects {{ block.shopify_attributes }}>
+                {%- comment -%} Pasada 1: color primero; pasada 2: el resto (talla, etc.) {%- endcomment -%}
+                {%- for pass in (1..2) -%}
                 {%- for option in product.options_with_values -%}
                   {%- liquid
                     assign option_key = option.name | downcase
@@ -58,8 +60,14 @@
                     if option_key contains 'color' or option_key contains 'colour'
                       assign is_swatch = true
                     endif
+                    if pass == 1 and is_swatch == false
+                      continue
+                    endif
+                    if pass == 2 and is_swatch
+                      continue
+                    endif
                   -%}
-                  <fieldset class="product-form__input">
+                  <fieldset class="product-form__input" data-option-position="{{ option.position }}">
                     <legend class="product-form__label">
                       {{ option.name | escape }}
                       {%- if is_swatch and option.selected_value != blank -%}
@@ -123,6 +131,7 @@
                       {%- endfor -%}
                     </div>
                   </fieldset>
+                {%- endfor -%}
                 {%- endfor -%}
                 <script type="application/json">
                   [

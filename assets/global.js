@@ -246,12 +246,15 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
-    const options = Array.from(this.querySelectorAll('fieldset')).map((fieldset) => {
+    // Los fieldsets pueden ir en otro orden (color primero): mapear por posición real de la opción
+    const options = [];
+    this.querySelectorAll('fieldset').forEach((fieldset, i) => {
       const checked = fieldset.querySelector('input:checked');
       // Refleja el valor elegido junto a la etiqueta (p. ej. "Color: Soft Pink")
       const selectedLabel = fieldset.querySelector('[data-selected-for]');
       if (selectedLabel && checked) selectedLabel.textContent = checked.value;
-      return checked ? checked.value : null;
+      const pos = parseInt(fieldset.dataset.optionPosition, 10) || i + 1;
+      options[pos - 1] = checked ? checked.value : null;
     });
 
     const variantsJson = this.querySelector('[type="application/json"]');
