@@ -6,6 +6,30 @@
     {%- endif -%}
   </header>
 
+  {%- if section.blocks.size > 0 -%}
+    <ul class="subcats" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign c = block.settings.collection
+          assign img = block.settings.image | default: c.featured_image
+          assign label = block.settings.title | default: c.title
+        -%}
+        <li {{ block.shopify_attributes }}>
+          <a href="{{ c.url | default: '#' }}" class="subcat">
+            <span class="subcat__media">
+              {%- if img -%}
+                {{ img | image_url: width: 300 | image_tag: loading: 'lazy', alt: label }}
+              {%- else -%}
+                {{ 'collection-apparel-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </span>
+            <span class="subcat__label">{{ label | escape }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="collection-toolbar">
       {%- if section.settings.enable_filtering -%}
@@ -69,7 +93,7 @@
       {%- endif -%}
 
       <div style="display:flex;align-items:center;gap:1.6rem;margin-left:auto;">
-        <span>{{ 'products.facets.product_count' | t: count: collection.products_count }}</span>
+        <span class="collection-toolbar__count">{{ 'products.facets.product_count' | t: count: collection.products_count }}</span>
         {%- if section.settings.enable_sorting -%}
           {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
           <label class="visually-hidden" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
@@ -129,6 +153,17 @@
 {% schema %}
 {
   "name": "Main collection",
+  "blocks": [
+    {
+      "type": "subcat",
+      "name": "Subcategory tile",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Square-ish, 300 x 300 px. Falls back to the collection image." },
+        { "type": "text", "id": "title", "label": "Custom label" }
+      ]
+    }
+  ],
   "settings": [
     {
       "type": "range",

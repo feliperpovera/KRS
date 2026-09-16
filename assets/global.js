@@ -409,5 +409,7 @@ customElements.define('quantity-input', QuantityInput);
     img.removeAttribute('srcset');
     card.querySelectorAll('.product-card__swatch.is-active').forEach((x) => x.classList.remove('is-active'));
     sw.classList.add('is-active');
+    const name = card.querySelector('[data-color-name]');
+    if (name && sw.dataset.color) name.textContent = sw.dataset.color;
   }, { capture: true, passive: true });
 });

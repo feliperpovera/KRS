@@ -678,8 +678,9 @@ button {
 
 .product-card__swatches {
   display: flex;
+  align-items: center;
   gap: 0.6rem;
-  margin: 0.4rem 0 0;
+  margin: 0 0 0.6rem;
   padding: 0;
   list-style: none;
 }
@@ -699,6 +700,52 @@ button {
 .product-card__swatch.is-active {
   box-shadow: 0 0 0 1px var(--color-background), 0 0 0 2px var(--color-text);
 }
+
+.product-card__swatch-more { font-size: 1.1rem; font-weight: 600; margin-left: 0.2rem; }
+
+.product-card__tag {
+  align-self: flex-start;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  background: #f0ede7;
+  margin-bottom: 0.4rem;
+}
+
+.product-card__color { font-size: 1.25rem; opacity: 0.7; margin: 0; }
+
+/* Subcategorías (fila de tiles bajo el título de colección) */
+.subcats {
+  display: flex;
+  gap: 2.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  list-style: none;
+  margin: 0 0 2.4rem;
+  padding: 0 0 0.4rem;
+}
+.subcats::-webkit-scrollbar { display: none; }
+.subcat { display: block; width: 11rem; flex: 0 0 auto; text-align: center; }
+.subcat__media { display: block; aspect-ratio: 1; overflow: hidden; background: #f4f2ef; margin-bottom: 0.8rem; }
+.subcat__media img, .subcat__media svg { width: 100%; height: 100%; object-fit: cover; }
+.subcat__label { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.subcat:hover .subcat__label { text-decoration: underline; text-underline-offset: 0.3rem; }
+
+.collection-toolbar { border-top: none; }
+.collection-toolbar__count { opacity: 0.65; }
+.collection-toolbar select {
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+  background: transparent;
+}
+.facets summary { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 
 /* ------------------------------------------------------------
    Product grid & carousels

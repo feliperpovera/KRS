@@ -27,6 +27,72 @@
       {%- endif -%}
     </a>
     <div class="product-card__info">
+      {%- liquid
+        assign color_option = nil
+        for option in card_product.options_with_values
+          assign option_key = option.name | downcase
+          if option_key contains 'color' or option_key contains 'colour'
+            assign color_option = option
+          endif
+        endfor
+        assign tag_label = ''
+        for tag in card_product.tags
+          assign t = tag | downcase
+          if t == 'best seller' or t == 'best-seller' or t == 'bestseller'
+            assign tag_label = 'Best seller'
+          elsif t == 'new' or t == 'nuevo'
+            assign tag_label = 'New'
+          endif
+        endfor
+      -%}
+      {%- if color_option -%}
+        {%- assign opt_index = color_option.position | minus: 1 -%}
+        <ul class="product-card__swatches" role="list" aria-label="{{ color_option.name | escape }}">
+          {%- for value in color_option.values limit: 8 -%}
+            {%- liquid
+              assign swatch_variant = nil
+              for v in card_product.variants
+                if v.options[opt_index] == value
+                  assign swatch_variant = v
+                  break
+                endif
+              endfor
+            -%}
+            <li>
+              <a
+                href="{{ card_product.url }}{% if swatch_variant %}?variant={{ swatch_variant.id }}{% endif %}"
+                class="product-card__swatch{% if forloop.first %} is-active{% endif %}"
+                style="{% render 'swatch-style', value: value %}"
+                title="{{ value | escape }}"
+                data-color="{{ value | escape }}"
+                {% if swatch_variant.featured_media %}data-image="{{ swatch_variant.featured_media | image_url: width: 800 }}"{% endif %}
+              >
+                <span class="visually-hidden">{{ value | escape }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+          {%- if color_option.values.size > 8 -%}
+            <li class="product-card__swatch-more">+{{ color_option.values.size | minus: 8 }}</li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+      {%- if tag_label != blank -%}
+        <span class="product-card__tag">{{ tag_label }}</span>
+      {%- endif -%}
+      <h3 class="product-card__title">
+        <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+      </h3>
+      {%- if color_option -%}
+        <p class="product-card__color" data-color-name>{{ color_option.values | first | escape }}</p>
+      {%- endif -%}
+      {% render 'price', product: card_product %}
+    </div>
+  </div>
+{%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </a>
+    <div class="product-card__info">
       <h3 class="product-card__title">
         <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
       </h3>
