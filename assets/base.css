@@ -676,6 +676,30 @@ button {
   color: var(--color-sale);
 }
 
+.product-card__swatches {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-card__swatch {
+  display: block;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background-size: cover;
+  background-position: center;
+  transition: box-shadow 0.15s ease;
+}
+
+.product-card__swatch:hover,
+.product-card__swatch.is-active {
+  box-shadow: 0 0 0 1px var(--color-background), 0 0 0 2px var(--color-text);
+}
+
 /* ------------------------------------------------------------
    Product grid & carousels
    ------------------------------------------------------------ */

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Uso: {% render 'swatch-style', value: value %}  → imprime "background-color:#hex" o background-image
+  Prioridad: swatch nativo de Shopify > mapa en Theme settings > nombre como color CSS
+{%- endcomment -%}
+{%- liquid
+  if value.swatch.image != blank
+    assign swatch_image = value.swatch.image | image_url: width: 120
+    echo 'background-image:url(' | append: swatch_image | append: ')'
+  elsif value.swatch.color != blank
+    echo 'background-color:' | append: value.swatch.color
+  else
+    assign value_key = value | downcase | strip
+    assign swatch_hex = ''
+    assign swatch_pairs = settings.color_swatches | newline_to_br | split: '<br />'
+    for pair in swatch_pairs
+      assign kv = pair | strip | split: ':'
+      if kv.size == 2
+        assign kv_name = kv[0] | downcase | strip
+        if kv_name == value_key
+          assign swatch_hex = kv[1] | strip
+          break
+        endif
+      endif
+    endfor
+    if swatch_hex == blank
+      assign swatch_hex = value_key | replace: ' ', '' | replace: '-', ''
+    endif
+    echo 'background-color:' | append: swatch_hex
+  endif
+-%}

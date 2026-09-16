@@ -396,3 +396,18 @@ class QuantityInput extends HTMLElement {
   }
 }
 customElements.define('quantity-input', QuantityInput);
+
+/* Círculos de color en las tarjetas: previsualizan la foto de ese color */
+['mouseenter', 'touchstart'].forEach((evt) => {
+  document.addEventListener(evt, (e) => {
+    const sw = e.target.closest && e.target.closest('.product-card__swatch[data-image]');
+    if (!sw) return;
+    const card = sw.closest('.product-card');
+    const img = card && card.querySelector('.product-card__media img:first-child');
+    if (!img) return;
+    img.src = sw.dataset.image;
+    img.removeAttribute('srcset');
+    card.querySelectorAll('.product-card__swatch.is-active').forEach((x) => x.classList.remove('is-active'));
+    sw.classList.add('is-active');
+  }, { capture: true, passive: true });
+});
