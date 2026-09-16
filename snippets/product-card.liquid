@@ -38,8 +38,9 @@
             {%- for value in option.values -%}
               {%- liquid
                 assign swatch_variant = nil
+                assign opt_index = option.position | minus: 1
                 for v in card_product.variants
-                  if v.options[option.position | minus: 1] == value
+                  if v.options[opt_index] == value
                     assign swatch_variant = v
                     break
                   endif
