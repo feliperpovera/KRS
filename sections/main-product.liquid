@@ -1,37 +1,40 @@
 <div class="page-width">
   <div class="product">
     <div class="product__gallery">
-      <ul class="product__media-list" role="list">
-        {%- if product.media.size > 0 -%}
-          {%- for media in product.media -%}
-            <li data-media-id="{{ media.id }}"{% if product.selected_or_first_available_variant.featured_media.id == media.id %} data-variant-media{% endif %}>
-              <div class="product__media">
-                {%- case media.media_type -%}
-                  {%- when 'image' -%}
-                    {%- liquid
-                      assign media_loading = 'lazy'
-                      if forloop.first
-                        assign media_loading = 'eager'
-                      endif
-                    -%}
-                    {{
-                      media
-                      | image_url: width: 1500
-                      | image_tag: loading: media_loading, sizes: '(min-width: 990px) 55vw, 100vw', widths: '550, 750, 1100, 1500', alt: media.alt
-                    }}
-                  {%- when 'video', 'external_video' -%}
-                    {{ media | media_tag: autoplay: false, controls: true }}
-                  {%- when 'model' -%}
-                    {{ media | media_tag }}
-                {%- endcase -%}
-              </div>
-            </li>
-          {%- endfor -%}
+      {%- liquid
+        assign main_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+      -%}
+      <div class="product__media product__main" data-main-media>
+        {%- if main_media -%}
+          {{
+            main_media
+            | image_url: width: 1500
+            | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 55vw, 100vw', widths: '550, 750, 1100, 1500', alt: main_media.alt
+          }}
         {%- else -%}
-          <li><div class="product__media">{{ 'product-apparel-1' | placeholder_svg_tag }}</div></li>
-          <li><div class="product__media">{{ 'product-apparel-2' | placeholder_svg_tag }}</div></li>
+          {{ 'product-apparel-1' | placeholder_svg_tag }}
         {%- endif -%}
-      </ul>
+      </div>
+      {%- if product.media.size > 1 -%}
+        <ul class="product__thumbs" role="list">
+          {%- for media in product.media -%}
+            {%- if media.media_type == 'image' -%}
+              <li>
+                <button
+                  type="button"
+                  class="product__thumb{% if media.id == main_media.id %} is-active{% endif %}"
+                  data-media-id="{{ media.id }}"
+                  data-src="{{ media | image_url: width: 1500 }}"
+                  data-alt="{{ media.alt | escape }}"
+                  aria-label="{{ media.alt | default: product.title | escape }}"
+                >
+                  {{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: media.alt }}
+                </button>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
     </div>
 
     <div class="product__info">
