@@ -260,7 +260,29 @@ class VariantSelects extends HTMLElement {
     const variantsJson = this.querySelector('[type="application/json"]');
     if (!variantsJson) return;
     const variants = JSON.parse(variantsJson.textContent);
-    const variant = variants.find((v) => v.options.every((opt, i) => opt === options[i]));
+    let variant = variants.find((v) => v.options.every((opt, i) => opt === options[i]));
+
+    // Si la combinación no existe (p. ej. Beige solo en M), saltar a la primera talla
+    // disponible de ese color en vez de dejar "Unavailable" y la foto vieja
+    if (!variant) {
+      const colorFs = this.querySelector('fieldset .variant-options--swatch')?.closest('fieldset');
+      const pos = colorFs ? (parseInt(colorFs.dataset.optionPosition, 10) || 1) - 1 : -1;
+      if (pos >= 0 && options[pos]) {
+        const sameColor = variants.filter((v) => v.options[pos] === options[pos]);
+        variant = sameColor.find((v) => v.available) || sameColor[0];
+        if (variant) {
+          variant.options.forEach((val, i) => {
+            if (i === pos) return;
+            const input = this.querySelector(`fieldset[data-option-position="${i + 1}"] input[value="${CSS.escape(val)}"]`);
+            if (input && !input.checked) {
+              input.checked = true;
+              const lbl = input.closest('fieldset').querySelector('[data-selected-for]');
+              if (lbl) lbl.textContent = val;
+            }
+          });
+        }
+      }
+    }
 
     const productInfo = this.closest('.product__info') || document;
     const idInput = productInfo.querySelector('input[name="id"]');
