@@ -4,7 +4,7 @@
       <ul class="product__media-list" role="list">
         {%- if product.media.size > 0 -%}
           {%- for media in product.media -%}
-            <li>
+            <li data-media-id="{{ media.id }}"{% if product.selected_or_first_available_variant.featured_media.id == media.id %} data-variant-media{% endif %}>
               <div class="product__media">
                 {%- case media.media_type -%}
                   {%- when 'image' -%}
@@ -129,6 +129,7 @@
                     {%- for variant in product.variants -%}
                       {
                         "id": {{ variant.id }},
+                        "featured_media_id": {{ variant.featured_media.id | default: 'null' }},
                         "available": {{ variant.available }},
                         "options": {{ variant.options | json }},
                         "price": {{ variant.price }},

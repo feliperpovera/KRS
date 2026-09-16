@@ -24,7 +24,12 @@ function observeScrollTriggers(root = document) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => observeScrollTriggers());
+document.addEventListener('DOMContentLoaded', () => {
+  observeScrollTriggers();
+  const list = document.querySelector('.product__media-list');
+  const first = list && list.querySelector('[data-variant-media]');
+  if (first && list.firstElementChild !== first) list.prepend(first);
+});
 document.addEventListener('shopify:section:load', (e) => observeScrollTriggers(e.target));
 
 /* ------------------------------------------------------------
@@ -268,6 +273,16 @@ class VariantSelects extends HTMLElement {
 
     if (idInput) idInput.value = variant.id;
     window.history.replaceState({}, '', `${window.location.pathname}?variant=${variant.id}`);
+
+    // La foto de la variante elegida pasa al primer lugar de la galería
+    if (variant.featured_media_id) {
+      const list = document.querySelector('.product__media-list');
+      const item = list && list.querySelector(`[data-media-id="${variant.featured_media_id}"]`);
+      if (item && list.firstElementChild !== item) {
+        list.prepend(item);
+        if (window.innerWidth < 990) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
 
     if (priceEl && variant.price_formatted) {
       priceEl.querySelector('[data-price]').textContent = variant.price_formatted;
