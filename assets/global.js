@@ -426,3 +426,22 @@ document.addEventListener('click', (e) => {
   e.preventDefault();
   selectCardSwatch(sw);
 });
+
+/* Colecciones por color (color-*): cada tarjeta arranca mostrando la prenda en ese color */
+(() => {
+  const root = document.querySelector('[data-collection-handle^="color-"]');
+  if (!root) return;
+  const words = {
+    'color-black': ['black'], 'color-white': ['white'], 'color-beige-cream': ['beige', 'cream', 'sand'],
+    'color-brown': ['brown', 'mocha', 'ochre'], 'color-pink': ['pink', 'fuchsia'],
+    'color-blue': ['navy', 'blue', 'turquoise', 'sky'], 'color-green': ['green', 'olive'],
+    'color-purple': ['lilac', 'purple', 'violet'], 'color-gray': ['gray', 'grey'],
+    'color-yellow-orange': ['mustard', 'yellow', 'orange'], 'color-red': ['red', 'coral', 'wine']
+  }[root.dataset.collectionHandle];
+  if (!words) return;
+  root.querySelectorAll('.product-card').forEach((card) => {
+    const sw = [...card.querySelectorAll('.product-card__swatch')]
+      .find((s) => words.some((w) => (s.dataset.color || '').toLowerCase().includes(w)));
+    if (sw && !sw.classList.contains('is-active')) selectCardSwatch(sw);
+  });
+})();
