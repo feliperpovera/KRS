@@ -65,7 +65,14 @@
                 style="{% render 'swatch-style', value: value %}"
                 title="{{ value | escape }}"
                 data-color="{{ value | escape }}"
-                {% if swatch_variant.featured_media %}data-image="{{ swatch_variant.featured_media | image_url: width: 800 }}"{% endif %}
+                {%- if swatch_variant.featured_media -%}
+                  {%- liquid
+                    assign fm = swatch_variant.featured_media
+                    assign back_media = card_product.media[fm.position]
+                  -%}
+                  data-image="{{ fm | image_url: width: 800 }}"
+                  {%- assign vname = value | append: "" -%}{% if back_media and back_media.alt contains vname %}data-image-back="{{ back_media | image_url: width: 800 }}"{% endif %}
+                {%- endif -%}
               >
                 <span class="visually-hidden">{{ value | escape }}</span>
               </a>
