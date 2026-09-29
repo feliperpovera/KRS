@@ -1768,3 +1768,15 @@ button {
 .hidden {
   display: none !important;
 }
+
+/* Fila de colores en el catálogo */
+.color-nav { display: flex; align-items: center; gap: 1.2rem; margin: 0 0 2rem; overflow-x: auto; scrollbar-width: none; }
+.color-nav::-webkit-scrollbar { display: none; }
+.color-nav__label { font-size: 1.2rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; flex: 0 0 auto; }
+.color-nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+.color-nav__item { display: flex; flex-direction: column; align-items: center; gap: .5rem; text-decoration: none; color: inherit; min-width: 5.6rem; }
+.color-nav__dot { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); box-shadow: 0 0 0 2px transparent; transition: box-shadow .2s; }
+.color-nav__item:hover .color-nav__dot, .color-nav__item.is-active .color-nav__dot { box-shadow: 0 0 0 2px #fff, 0 0 0 3px #000; }
+.color-nav__name { font-size: 1.1rem; white-space: nowrap; }
+.color-nav__item.is-active .color-nav__name { font-weight: 600; }
+.color-nav__clear { font-size: 1.2rem; text-decoration: underline; color: inherit; align-self: center; white-space: nowrap; }

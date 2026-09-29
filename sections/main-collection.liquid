@@ -30,6 +30,33 @@
     </ul>
   {%- endif -%}
 
+  {%- comment -%} Colores: cada círculo lleva a su colección de color (todas las prendas en ese color) {%- endcomment -%}
+  {%- liquid
+    assign color_handles = 'color-black:#111111,color-white:#FFFFFF,color-beige-cream:#E4DCCA,color-brown:#8B5A3C,color-pink:#F4A6C6,color-blue:#2A3350,color-green:#3E8E5E,color-purple:#C9B6E4,color-gray:#9A9A9A,color-yellow-orange:#D4A62A,color-red:#C8102E' | split: ','
+  -%}
+  <nav class="color-nav" aria-label="Shop by color">
+    <span class="color-nav__label">Color</span>
+    <ul role="list">
+      {%- for pair in color_handles -%}
+        {%- liquid
+          assign parts = pair | split: ':'
+          assign c = collections[parts[0]]
+        -%}
+        {%- if c != blank and c.products_count > 0 -%}
+          <li>
+            <a href="{{ c.url }}" class="color-nav__item{% if collection.handle == parts[0] %} is-active{% endif %}" title="{{ c.title | escape }}">
+              <span class="color-nav__dot" style="background:{{ parts[1] }}"></span>
+              <span class="color-nav__name">{{ c.title | escape }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if collection.handle contains 'color-' -%}
+        <li><a href="{{ routes.all_products_collection_url }}" class="color-nav__clear">Clear</a></li>
+      {%- endif -%}
+    </ul>
+  </nav>
+
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="collection-toolbar">
       {%- if section.settings.enable_filtering -%}
