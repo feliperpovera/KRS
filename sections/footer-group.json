@@ -9,21 +9,21 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop",
-            "menu": "footer"
+            "menu": "footer-shop"
           }
         },
         "menu-2": {
           "type": "link_list",
           "settings": {
             "heading": "Help",
-            "menu": "footer"
+            "menu": "footer-help"
           }
         },
         "menu-3": {
           "type": "link_list",
           "settings": {
-            "heading": "About",
-            "menu": "footer"
+            "heading": "Legal",
+            "menu": "footer-legal"
           }
         },
         "newsletter-1": {
@@ -34,11 +34,18 @@
           }
         }
       },
-      "block_order": ["menu-1", "menu-2", "menu-3", "newsletter-1"],
+      "block_order": [
+        "menu-1",
+        "menu-2",
+        "menu-3",
+        "newsletter-1"
+      ],
       "settings": {
         "show_payment_icons": true
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

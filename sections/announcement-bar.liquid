@@ -1,5 +1,5 @@
 {%- if section.blocks.size > 0 -%}
-  <div class="announcement-bar" role="region" aria-label="Anuncio">
+  <div class="announcement-bar" role="region" aria-label="Announcement">
     {%- for block in section.blocks -%}
       {%- if forloop.first -%}
         <p style="margin:0" {{ block.shopify_attributes }}>
@@ -27,7 +27,7 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Free shipping on orders over $120"
+          "default": "Free shipping on orders over $200"
         },
         {
           "type": "url",

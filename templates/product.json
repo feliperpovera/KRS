@@ -4,19 +4,31 @@
       "type": "main-product",
       "blocks": {
         "vendor": {
-          "type": "vendor"
+          "type": "vendor",
+          "settings": {}
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "variant_picker": {
-          "type": "variant_picker"
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_guide": {
+          "type": "size_guide",
+          "settings": {
+            "label": "Size guide",
+            "note": "Measurements in inches. Between sizes? Size down for a compressive fit."
+          }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -25,27 +37,26 @@
           }
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {}
         },
         "tab-details": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Details & care",
-            "content": "<p>Add fabric composition, care guide or product details here.</p>"
+            "content": "<ul><li>Machine wash cold, inside out, with similar colors.</li><li>Use a gentle cycle and mild detergent. Do not use bleach or fabric softener.</li><li>Lay flat or hang to dry. Do not tumble dry.</li><li>Do not iron, dry clean or wash with abrasive items (zippers, Velcro).</li></ul><p>Designed and made in Colombia with our own fabrics.</p>"
           }
         },
         "tab-shipping": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Shipping & returns",
-            "content": "<p>Add your shipping and returns policy here.</p>"
+            "content": "<p><strong>Free standard shipping on orders of $200 or more.</strong></p><ul><li>Standard Shipping: 4–7 business days, $10.00</li><li>Fast Shipping: 3 business days, $20.00</li><li>Orders are processed within 1–2 business days. U.S. addresses only.</li></ul><p><strong>Easy returns within 30 days</strong> of delivery for unworn items with tags attached. Final sale and Outlet items are not returnable.</p><p><a href=\"/policies/shipping-policy\">Shipping policy</a> · <a href=\"/policies/refund-policy\">Returns &amp; refunds</a></p>"
           }
         },
         "share": {
-          "type": "share"
-        },
-        "size_guide": {
-          "type": "size_guide"
+          "type": "share",
+          "settings": {}
         }
       },
       "block_order": [
