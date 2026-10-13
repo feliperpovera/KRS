@@ -147,11 +147,34 @@ class CartDrawer extends HTMLElement {
     }
     if (sections && sections['cart-icon-bubble']) {
       const bubble = document.getElementById('cart-icon-bubble');
-      if (bubble) bubble.innerHTML = sections['cart-icon-bubble'];
+      const b = new DOMParser().parseFromString(sections['cart-icon-bubble'], 'text/html').querySelector('.shopify-section');
+      if (bubble) bubble.innerHTML = b ? b.innerHTML : sections['cart-icon-bubble'];
     }
   }
 }
 customElements.define('cart-drawer', CartDrawer);
+
+/* Agregar una recomendación desde el carrito lateral */
+document.addEventListener('submit', async (e) => {
+  const form = e.target.closest('[data-cart-rec]');
+  if (!form) return;
+  e.preventDefault();
+  const btn = form.querySelector('button');
+  btn.disabled = true;
+  try {
+    const res = await fetch(window.routes.cart_add_url + '.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ items: [{ id: +form.querySelector('select').value, quantity: 1 }], sections: 'cart-drawer,cart-icon-bubble' })
+    });
+    const data = await res.json();
+    const drawer = document.querySelector('cart-drawer');
+    if (drawer && data.sections) drawer.renderFromSections(data.sections);
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+  }
+});
 
 async function cartRequest(url, body) {
   const response = await fetch(url, {

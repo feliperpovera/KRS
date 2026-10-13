@@ -1,0 +1,44 @@
+{%- comment -%} "Complete the look": prendas de custom.complete_the_look de los productos del carrito {%- endcomment -%}
+{%- liquid
+  assign in_cart = cart.items | map: 'product_id' | join: ','
+  assign in_cart = ',' | append: in_cart | append: ','
+  assign shown = ','
+  assign count = 0
+-%}
+{%- capture recs -%}
+  {%- for item in cart.items -%}
+    {%- for rec in item.product.metafields.custom.complete_the_look.value -%}
+      {%- liquid
+        assign rid = ',' | append: rec.id | append: ','
+        if in_cart contains rid or shown contains rid or rec.available == false or count >= 3
+          continue
+        endif
+        assign shown = shown | append: rec.id | append: ','
+        assign count = count | plus: 1
+      -%}
+      <form class="cart-rec" data-cart-rec>
+        <a href="{{ rec.url }}" class="cart-rec__image">
+          {{ rec.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: rec.title }}
+        </a>
+        <div class="cart-rec__info">
+          <a href="{{ rec.url }}" class="cart-rec__title">{{ rec.title | escape }}</a>
+          <span class="cart-rec__price">{{ rec.price | money }}</span>
+          <div class="cart-rec__row">
+            <select name="id" aria-label="{{ rec.title | escape }}">
+              {%- for v in rec.variants -%}
+                {%- if v.available -%}<option value="{{ v.id }}">{{ v.title | escape }}</option>{%- endif -%}
+              {%- endfor -%}
+            </select>
+            <button type="submit" class="cart-rec__add">Add</button>
+          </div>
+        </div>
+      </form>
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if count > 0 -%}
+  <div class="cart-recs">
+    <p class="cart-recs__heading">Complete the look</p>
+    {{ recs }}
+  </div>
+{%- endif -%}

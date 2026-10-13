@@ -80,10 +80,17 @@
         "heading": "You may also like",
         "products_to_show": 8
       }
+    },
+    "complete-the-look": {
+      "type": "complete-the-look",
+      "settings": {
+        "heading": "Complete the look"
+      }
     }
   },
   "order": [
     "main",
+    "complete-the-look",
     "related"
   ]
 }
