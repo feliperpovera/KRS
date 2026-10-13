@@ -454,7 +454,7 @@ document.addEventListener('click', (e) => {
 (() => {
   const families = {
     'color-black': ['black'], 'color-white': ['white'], 'color-beige-cream': ['beige', 'cream', 'sand'],
-    'color-brown': ['brown', 'mocha', 'ochre'], 'color-pink': ['pink', 'fuchsia'],
+    'color-brown': ['mocha', 'brown'], 'color-sky': ['baby blue', 'sky', 'soft blue'], 'color-pink': ['pink', 'fuchsia'],
     'color-blue': ['navy', 'blue', 'turquoise', 'sky'], 'color-green': ['green', 'olive'],
     'color-purple': ['lilac', 'purple', 'violet'], 'color-gray': ['gray', 'grey'],
     'color-yellow-orange': ['mustard', 'yellow', 'orange'], 'color-red': ['red', 'coral', 'wine']
@@ -469,8 +469,13 @@ document.addEventListener('click', (e) => {
   document.querySelectorAll('.product-card').forEach((card) => {
     const sws = [...card.querySelectorAll('.product-card__swatch')];
     const name = (s) => (s.dataset.color || '').toLowerCase();
-    const sw = sws.find((s) => exact.includes(name(s))) ||
-      sws.find((s) => words.some((w) => name(s).includes(w)));
+    /* Colores que coinciden, en el orden de prioridad de la colección; preferir los que tienen foto propia */
+    const matches = exact.length
+      ? sws.filter((s) => exact.includes(name(s)))
+      : words.flatMap((w) => sws.filter((s) => name(s).includes(w)));
+    const sw = matches.find((s) => s.dataset.image) || matches[0];
     if (sw && !sw.classList.contains('is-active')) selectCardSwatch(sw);
+    /* En colecciones de color: ocultar prendas que no tienen foto real de ese color */
+    if (words.length && (!sw || !sw.dataset.image)) (card.closest('li') || card).hidden = true;
   });
 })();

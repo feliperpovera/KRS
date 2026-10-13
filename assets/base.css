@@ -1795,3 +1795,5 @@ button {
 .cart-rec__add:disabled { opacity: .5; }
 .product-grid--3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 @media (max-width: 749px) { .product-grid--3 { grid-template-columns: repeat(2, 1fr); } }
+
+[hidden] { display: none !important; }

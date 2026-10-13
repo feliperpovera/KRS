@@ -3,61 +3,24 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "image": "shopify://shop_images/krs-hero-desktop.jpg",
+        "image_mobile": "shopify://shop_images/krs-hero-mobile.png",
         "height": "full",
         "alignment": "left",
         "subheading": "The life you live",
         "heading": "Move beautifully",
         "text": "Premium activewear born in Colombia, designed for the modern woman who moves through life with elegance, confidence and intention.",
         "button_label_1": "Shop new in",
-        "button_label_2": "Best sellers"
-      }
-    },
-    "pillars": {
-      "type": "brand-pillars",
-      "blocks": {
-        "pillar-1": {
-          "type": "pillar",
-          "settings": {
-            "title": "Own fabrication",
-            "text": "We develop our own fabrics."
-          }
-        },
-        "pillar-2": {
-          "type": "pillar",
-          "settings": {
-            "title": "Own design",
-            "text": "Every piece is designed with intention."
-          }
-        },
-        "pillar-3": {
-          "type": "pillar",
-          "settings": {
-            "title": "Detail",
-            "text": "We control every step of the process."
-          }
-        },
-        "pillar-4": {
-          "type": "pillar",
-          "settings": {
-            "title": "Quality",
-            "text": "We never compromise on what we deliver."
-          }
-        }
-      },
-      "block_order": [
-        "pillar-1",
-        "pillar-2",
-        "pillar-3",
-        "pillar-4"
-      ],
-      "settings": {
-        "heading": "We care about every detail"
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Best sellers",
+        "button_link_2": "shopify://collections/best-sellers"
       }
     },
     "new-arrivals": {
       "type": "featured-collection",
       "settings": {
         "heading": "New in",
+        "collection": "set",
         "products_to_show": 8,
         "show_view_all": true,
         "view_all_label": "View all"
@@ -69,25 +32,37 @@
         "tile-1": {
           "type": "tile",
           "settings": {
-            "title": "Pilates"
+            "collection": "activity-pilates",
+            "image": "shopify://shop_images/krs-tile-pilates_8.png",
+            "title": "Pilates",
+            "link": ""
           }
         },
         "tile-2": {
           "type": "tile",
           "settings": {
-            "title": "Yoga"
+            "collection": "activity-yoga",
+            "image": "shopify://shop_images/krs-tile-pilates_6.png",
+            "title": "Yoga",
+            "link": ""
           }
         },
         "tile-3": {
           "type": "tile",
           "settings": {
-            "title": "Tennis"
+            "collection": "activity-tennis",
+            "image": "shopify://shop_images/5.png",
+            "title": "Tennis",
+            "link": ""
           }
         },
         "tile-4": {
           "type": "tile",
           "settings": {
-            "title": "Everyday"
+            "collection": "activity-everyday",
+            "image": "shopify://shop_images/krs-tile-pilates_4.png",
+            "title": "Everyday",
+            "link": ""
           }
         }
       },
@@ -99,26 +74,21 @@
       ],
       "settings": {
         "heading": "For the life you live",
+        "link_label": "",
+        "link": "",
         "columns": 4
       }
     },
     "editorial-1": {
       "type": "image-with-text",
       "settings": {
+        "image": "shopify://shop_images/krs-popup.jpg",
         "layout": "default",
         "subheading": "Own design",
         "heading": "You deserve the best",
         "text": "<p>Pieces designed with intention, made with our own fabrics, to take you from pilates to coffee and from work to travel.</p>",
-        "button_label": "Shop best sellers"
-      }
-    },
-    "best-sellers": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Best sellers",
-        "products_to_show": 8,
-        "show_view_all": true,
-        "view_all_label": "View all"
+        "button_label": "Shop best sellers",
+        "button_link": "shopify://collections/best-sellers"
       }
     },
     "shop-by-color": {
@@ -127,31 +97,46 @@
         "color-1": {
           "type": "tile",
           "settings": {
-            "title": "Black"
+            "collection": "color-black",
+            "image": "shopify://shop_images/krs-tittle-color-black.jpg",
+            "title": "Black",
+            "link": ""
           }
         },
         "color-2": {
           "type": "tile",
           "settings": {
-            "title": "Cream"
+            "collection": "color-beige-cream",
+            "image": "shopify://shop_images/krs-tittle-color-cream.jpg",
+            "title": "Cream",
+            "link": ""
           }
         },
         "color-3": {
           "type": "tile",
           "settings": {
-            "title": "Pink"
+            "collection": "color-pink",
+            "image": "shopify://shop_images/krs-tittle-color-pink.jpg",
+            "title": "Pink",
+            "link": ""
           }
         },
         "color-4": {
           "type": "tile",
           "settings": {
-            "title": "Sky"
+            "collection": "color-sky",
+            "image": "shopify://shop_images/krs-tittle-color-sky.jpg",
+            "title": "Sky",
+            "link": ""
           }
         },
         "color-5": {
           "type": "tile",
           "settings": {
-            "title": "Mocha"
+            "collection": "color-brown",
+            "image": "shopify://shop_images/krs-tittle-color-mocca_1.jpg",
+            "title": "Mocha",
+            "link": ""
           }
         }
       },
@@ -164,17 +149,21 @@
       ],
       "settings": {
         "heading": "Shop by color",
+        "link_label": "",
+        "link": "",
         "columns": 5
       }
     },
     "editorial-2": {
       "type": "image-with-text",
       "settings": {
+        "image": "shopify://shop_images/197.png",
         "layout": "reverse",
         "subheading": "Made for your every day",
         "heading": "First time at KRS?",
         "text": "<p>Discover the community's favorites and find your perfect size with our guide.</p>",
-        "button_label": "Start here"
+        "button_label": "Start here",
+        "button_link": "shopify://collections/best-sellers"
       }
     },
     "newsletter": {
@@ -183,17 +172,34 @@
         "heading": "Join the KRS world",
         "text": "Launches, restocks and early access to exclusive offers, always with elegance."
       }
+    },
+    "17883680390ccacf37": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8b2df1b_XLfdzX": {
+          "type": "ai_gen_block_8b2df1b",
+          "settings": {
+            "desktop_width_percent": 100,
+            "desktop_logo_width": 260,
+            "mobile_logo_width": 160
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8b2df1b_XLfdzX"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero",
-    "best-sellers",
-    "pillars",
     "new-arrivals",
     "shop-by-activity",
     "editorial-1",
     "shop-by-color",
     "editorial-2",
-    "newsletter"
+    "newsletter",
+    "17883680390ccacf37"
   ]
 }
