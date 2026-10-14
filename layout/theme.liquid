@@ -11,6 +11,10 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    {%- if template.name == 'index' -%}
+      {%- assign page_title = "KRS | Women's Activewear in Miami - Sets, Leggings & Sports Bras" -%}
+      {%- assign page_description = "Premium women's activewear shipped from Miami. Shop sets, leggings, sports bras and tennis dresses for pilates, yoga and everyday wear. Free US shipping." -%}
+    {%- endif -%}
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
@@ -23,6 +27,11 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {%- if template.name == 'index' -%}
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ClothingStore","name":"KRS","url":{{ shop.url | json }},"email":"shop@kirios.co","description":"Women's activewear store in Miami: sets, leggings, sports bras and tennis dresses.","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"20815 NE 16th Ave","addressLocality":"Miami","addressRegion":"FL","postalCode":"33179","addressCountry":"US"},"areaServed":"US"}
+    </script>
+    {%- endif -%}
 
     {{ content_for_header }}
 
