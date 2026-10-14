@@ -51,7 +51,7 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Shipping & returns",
-            "content": "<p><strong>Free shipping on every order.</strong></p><ul><li>Standard Shipping: 4–7 business days, FREE</li><li>Fast Shipping: 3 business days, $20.00</li><li>Orders are processed within 1–2 business days. U.S. addresses only.</li></ul><p><strong>Easy returns within 30 days</strong> of delivery for unworn items with tags attached. Final sale and Outlet items are not returnable.</p><p><a href=\"/policies/shipping-policy\">Shipping policy</a> · <a href=\"/policies/refund-policy\">Returns &amp; refunds</a></p>"
+            "content": "<p><strong>Free shipping on every order.</strong></p><ul><li>Standard Shipping: 4–7 business days, FREE</li><li>Orders are processed within 1–2 business days. U.S. addresses only.</li></ul><p><strong>Easy returns within 30 days</strong> of delivery for unworn items with tags attached. Final sale and Outlet items are not returnable.</p><p><a href=\"/policies/shipping-policy\">Shipping policy</a> · <a href=\"/policies/refund-policy\">Returns &amp; refunds</a></p>"
           }
         },
         "share": {
