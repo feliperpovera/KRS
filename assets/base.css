@@ -1797,3 +1797,6 @@ button {
 @media (max-width: 749px) { .product-grid--3 { grid-template-columns: repeat(2, 1fr); } }
 
 [hidden] { display: none !important; }
+
+/* Carruseles horizontales: sin scroll vertical interno en móvil */
+.carousel, .subcats, .product__thumbs, .color-nav { overflow-y: hidden; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
